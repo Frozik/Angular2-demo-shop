@@ -1,0 +1,155 @@
+@import "./../../shared/styles/links.scss";
+
+$padding: 10px;
+$mobile-view-width: 600px;
+$max-width: 1400px;
+
+
+$light-color: #aeaeae;
+$dark-color: rgb(51, 51, 51);
+$box-color: #fff;
+
+.product-details {
+    margin: 0 auto;
+
+    width: 100%;
+    max-width: $max-width;
+
+    background-color: $box-color;
+    color: $dark-color;
+
+    &.loading {
+        app-spinner {
+            display: block;
+
+            overflow: hidden;
+        }
+    }
+
+    .menu {
+        padding: $padding;
+
+        width: 100%;
+
+        background: $dark-color;
+        color: $light-color;
+    }
+
+    .product-info {
+        display: flex;
+        flex-flow: row;
+
+        width: 100%;
+
+        @media screen and ( max-width: $mobile-view-width )
+        {
+            flex-flow: column;
+        }
+
+        .left, .right {
+            flex: 1 1 50%;
+
+            @media screen and ( max-width: $mobile-view-width )
+            {
+                flex: 0 0 100%;
+            }
+        }
+
+        .left {
+            background-color: $box-color;
+            line-height: 0;
+
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        .right {
+            padding: 2 * $padding;
+
+            background-color: $light-color;
+
+            h3 {
+                font-family: "Open Sans", sans-serif;
+                font-weight: 700;
+                font-size: 19px;
+                word-break: break-word;
+                text-align: center;
+
+                &.man {
+                    color: #0D47A1;
+                }
+
+                &.woman {
+                    color: #880E4F;
+                }
+            }
+
+            .additional-info {
+                width: 100%;
+
+                .price {
+                    float: left;
+
+                    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+                    font-size: 24px;
+                    font-weight: 700;
+                    line-height: 26px;
+
+                    &::before {
+                        content: attr(data-currency);
+                    }
+                }
+
+                .rating {
+                    float: right;
+
+                    $image-size: 16px;
+
+                    margin: 0;
+                    padding: 0;
+
+                    li {
+                        display: block;
+                        float: left;
+                        margin-left: $padding / 2;
+
+                        width: $image-size;
+                        height: $image-size;
+
+                        background: url("/assets/images/stars.png") no-repeat 0 0;
+
+                        &:first-child {
+                            margin-left: 0;
+                        }
+
+                        &.rated {
+                            background-position: 0px (-$image-size);
+                        }
+                    }
+                }
+            }
+
+            .available, .sold {
+                margin-top: 2 * $padding;
+
+                font-family: "Open Sans", sans-serif;
+                font-weight: 700;
+                font-size: 17px;
+            }
+
+            .available {
+                color: #33691E;
+            }
+
+            .sold {
+                color: #BF360C;
+            }
+        }
+    }
+}
+
+.clear {
+    clear: both;
+}

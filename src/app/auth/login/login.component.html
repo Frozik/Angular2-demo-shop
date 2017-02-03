@@ -1,0 +1,35 @@
+<div [formGroup]="form" class="login-form">
+    <h1>Angular2 demo shop</h1>
+    
+    <div class="form-group ">
+        <input
+            required
+            #usernameInput
+            type="text"
+            class="form-control"
+            placeholder="Username"
+            formControlName="username"
+        >
+        <i class="control-icon control-icon-user"></i>
+    </div>
+    <div class="form-group login-status" [ngClass]="{ 'wrong-entry': incorrectLogin }">
+        <input
+            required
+            #passwordInput
+            type="password"
+            class="form-control"
+            placeholder="Password"
+            formControlName="password"
+        >
+        <i class="control-icon control-icon-lock"></i>
+    </div>
+
+    <button
+        type="button"
+        class="login-button"
+        [disabled]="!form.valid"
+        (click)="login(usernameInput.value, passwordInput.value)"
+    >
+        Log in
+    </button>
+</div>

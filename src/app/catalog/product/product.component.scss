@@ -1,0 +1,139 @@
+$padding: 10px;
+
+$font-color: #372f2b;
+
+$transition: all .25s ease-in;
+
+.product {
+    display: flex;
+    flex-direction:column;
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    
+    text-align: left;
+    cursor: pointer;
+    background: #fff;
+    overflow: hidden;
+
+    &.sold {
+        opacity: .85;
+    }
+
+    .product-image {
+        flex: 0 0 auto;
+        position: relative;
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        .rating {
+            $image-size: 16px;
+
+            position: absolute;
+            left: $padding;
+            bottom: $padding;
+            margin: 0;
+            padding: 0;
+
+            opacity: 1;
+
+            transition: $transition;
+
+            @at-root .product:hover .product-image .rating {
+                opacity: .6;
+            }
+
+            li {
+                display: block;
+                float: left;
+                margin-left: $padding / 2;
+
+                width: $image-size;
+                height: $image-size;
+
+                background: url("/assets/images/stars.png") no-repeat 0 0;
+
+                &:first-child {
+                    margin-left: 0;
+                }
+
+                &.rated {
+                    background-position: 0px (-$image-size);
+                }
+            }
+        }
+    }
+
+    .product-caption {
+        flex: 1 1 100%;
+        padding: 2 * $padding;
+
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+        z-index: 0;
+
+        h4 {
+            position: relative;
+            margin: 0 0 2 * $padding 0;
+            padding: 0 0 2 * $padding 0;
+
+            font-family: "Open Sans", sans-serif;
+            font-weight: 700;
+            font-size: 19px;
+            line-height: 25px;
+            color: $font-color;
+            letter-spacing: -1px;
+            word-break: break-word;
+
+            &::after {
+                content: "";
+
+                display: block;
+                position: absolute;
+                bottom: 0px;
+
+                width: 30%;
+                height: 2px;
+
+                background: #a7adba;
+
+                transition: $transition;
+            }
+
+            &.man::after {
+                background: #3b86c4;
+            }
+
+            &.woman::after {
+                background: #fc8eac;
+            }
+        }
+
+        @at-root .product:hover .product-caption h4::after {
+            width: 100%;
+        }
+    }
+
+    .product-details {
+        flex: 0 0 auto;
+        padding: 2 * $padding;
+
+        .price {
+            display: block;
+            text-align: center;
+
+            font-family: "Open Sans", Helvetica, Arial, sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: $font-color;
+            line-height: 26px;
+
+            &::before {
+                content: attr(data-currency);
+            }
+        }
+    }
+}

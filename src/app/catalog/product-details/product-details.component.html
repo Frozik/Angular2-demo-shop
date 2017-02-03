@@ -1,0 +1,79 @@
+<div
+    class="product-details"
+    [class.loading]="loading"
+>
+    <div class="menu">
+        <a
+            class="action back"
+            (click)="location.back()"
+        >
+            Back
+        </a>
+    </div>
+    
+    <app-spinner
+        *ngIf="loading"
+    ></app-spinner>
+
+    <article
+        *ngIf="!loading && !!(product | async)"
+        class="product-info"
+    >
+        <div class="left">
+            <img src="{{(product | async).image}}">
+        </div>
+        <div class="right">
+            <h3
+                *ngIf="category"
+                [class.man]="(product | async).gender === genderType.Man"
+                [class.woman]="(product | async).gender === genderType.Woman"
+            >
+                {{(product | async).gender | gender}} / {{category.name}}
+            </h3>
+
+            <h4>{{(product | async).name}}</h4>
+
+            <p>{{(product | async).description}}</p>
+
+            <div class="additional-info">
+                <span class="price" data-currency="$">{{
+                    (product | async).cost
+                }}</span>
+
+                <ul class="rating">
+                    <li
+                        *ngFor="let number of [1,2,3,4,5]"
+                        [class.rated]="(product | async).rating >= number"
+                        class="rated"
+                    ></li>
+                </ul>
+
+                <div class="clear"></div>
+            </div>
+
+            <div
+                *ngIf="(product | async).count > (product | async).soldCount"
+                class="available"
+            >
+                {{(product | async).count - (product | async).soldCount}} items left
+            </div>
+
+            <div
+                *ngIf="(product | async).count <= (product | async).soldCount"
+                class="sold"
+            >
+                Sorry, sold out
+            </div>
+
+            <app-customer-controls
+                *ngIf="authService.credentials.role === roles.customer"
+                [product]="product | async"
+            ></app-customer-controls>
+
+            <app-administrator-controls
+                *ngIf="authService.credentials.role === roles.administrator"
+                [product]="product | async"
+            ></app-administrator-controls>
+        </div>
+    </article>
+</div>

@@ -1,0 +1,4 @@
+<footer *ngIf="!!this.authService.credentials" class="user-menu">
+        Hi, {{this.authService.credentials.login}}. <span class="action" (click)="logout()">Logout</span>
+</footer>
+

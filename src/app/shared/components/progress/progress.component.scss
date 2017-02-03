@@ -1,0 +1,59 @@
+@import "./../../styles/colors.scss";
+@import "./../../styles/box-model.scss";
+
+.progress {
+    box-sizing: border-box;
+    display: flex;
+    margin: 0;
+
+    width: 100%;
+
+    &:before {
+        content: "";
+
+        box-sizing: border-box;
+        display: block;
+
+        width: 100%;
+
+        animation: progress-running 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+}
+
+    .progress--theme-default {
+        $progress-light-color: $accent-background-color;
+        $progress-dark-color: $text-primary-color;
+
+        &.progress {
+            background-color: $progress-light-color;
+
+            &:before {
+                background-color: $progress-dark-color;
+            }
+        }
+    }
+
+    .rogress--size-default {
+        &.progress {
+            height: 3px;
+
+            &:before {
+                height: 3px;
+            }
+        }
+    }
+
+@keyframes progress-running {
+    0% {
+        margin-left: 0px;
+        margin-right: 100%;
+    }
+    50% {
+        margin-left: 25%;
+        margin-right: 0%;
+    }
+    100% {
+        margin-left: 100%;
+        margin-right: 0;
+    }
+}

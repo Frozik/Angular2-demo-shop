@@ -1,0 +1,21 @@
+<div class="select select--theme-default select--size-default">
+    <h4
+        *ngIf="!!caption"
+        class="select__caption"
+    >{{
+        caption
+    }}</h4>
+        
+    <select
+        (change)="valueChanged($event.target.value)"
+        class="select__control"
+    >
+        <option
+            *ngFor="let item of items; let index = index;"
+            [value]="index"
+            [selected]="item[keyProperty] === selectedKey"
+        >{{
+            item[displayProperty]
+        }}</option>
+    </select>
+</div>

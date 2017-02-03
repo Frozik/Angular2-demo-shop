@@ -1,0 +1,71 @@
+<article
+    class="product-page"
+    [class.sidebar-shown]="sidebarShown"
+>
+    <div class="layout">
+        <nav class="navigation-bar">
+            <a class="action show-filter" (click)="sidebarShown = true"></a>
+
+            <a
+                *ngIf="authService.credentials.role === roles.administrator && (categories | async)"
+                class="action button-texted add-category"
+                (click)="popup = popupType.AddCategory"
+            >
+                category
+            </a>
+
+            <a
+                *ngIf="authService.credentials.role === roles.administrator && (categories | async)"
+                class="action button-texted delete-category"
+                (click)="popup = popupType.DeleteCategory"
+            >
+                category
+            </a>
+        </nav>
+
+        <app-product-list></app-product-list>
+    </div>
+
+    <div class="overlay" (click)="sidebarShown = false"></div>
+    
+    <aside class="sidebar">
+        <app-product-filter></app-product-filter>
+    </aside>
+</article>
+
+<app-popup
+    *ngIf="popup === popupType.AddCategory"
+    class="popup"
+    caption="Add category"
+    (cancelPressed)="popup = popupType.None"
+    (okPressed)="addCategory(categoryName.value); popup = popupType.None;"
+>
+    <fieldset class="fields">
+        <div class="input category">
+            <label for="category-name">Category name:</label>
+            <input #categoryName type="text" id="category-name">
+        </div>
+    </fieldset>
+</app-popup>
+
+<app-popup
+    *ngIf="popup === popupType.DeleteCategory"
+    class="popup"
+    caption="Delete category"
+    (cancelPressed)="popup = popupType.None"
+    (okPressed)="deleteCategory(selectCategoryId.value); popup = popupType.None;"
+>
+    <fieldset class="fields">
+        <div class="input category">
+            <label for="category-name">Category:</label>
+            <select #selectCategoryId>
+                <option
+                    *ngFor="let category of categories | async"
+                    [value]="category.id"
+                >
+                    {{category.name}}
+                </option>
+            </select>
+        </div>
+    </fieldset>
+</app-popup>

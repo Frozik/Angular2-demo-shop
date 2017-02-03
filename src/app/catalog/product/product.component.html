@@ -1,0 +1,31 @@
+<article
+    class="product"
+    [class.sold]="product.count <= product.soldCount"
+>
+    <div class="product-image">
+        <img src="{{product.image}}">
+        
+        <ul class="rating">
+            <li
+                *ngFor="let number of [1,2,3,4,5]"
+                [class.rated]="product.rating >= number"
+                class="rated"
+            ></li>
+        </ul>
+    </div>
+
+    <div class="product-caption">
+        <h4
+            [class.man]="product.gender === genderType.Man"
+            [class.woman]="product.gender === genderType.Woman"
+        >
+            {{product.name}}
+        </h4>
+
+         <p class="description">{{product.description}}</p>
+    </div>
+
+    <div class="product-details">
+         <span class="price" data-currency="$">{{product.cost | toFixed}}</span>
+    </div>
+</article>

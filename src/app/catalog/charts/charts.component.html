@@ -1,0 +1,42 @@
+<div
+    class="chart-page"
+    [class.loading]="loading"
+>
+    <div
+        *ngIf="!loading"
+        class="charts"
+    >
+        <div class="left">
+            <h3>Sold by category</h3>
+
+            <app-spinner *ngIf="!soldItemsByCategoryData"></app-spinner>
+
+            <canvas
+                *ngIf="!!soldItemsByCategoryData"
+                baseChart
+                [datasets]="[soldItemsByCategoryData.dataset]"
+                [labels]="soldItemsByCategoryData.labels"
+                [options]="{ responsive: true, legend: { display: false } }"
+                [colors]="lineChartColors"
+                [legend]="true"
+                chartType="line"
+            ></canvas>
+        </div>
+        <div class="right">
+            <h3>Revenue by category</h3>
+
+            <app-spinner *ngIf="!revenueByCategoryData"></app-spinner>
+
+            <canvas
+                *ngIf="!!revenueByCategoryData"
+                baseChart
+                [datasets]="[revenueByCategoryData.dataset]"
+                [labels]="revenueByCategoryData.labels"
+                [options]="{ responsive: true, legend: { display: false } }"
+                [colors]="lineChartColors"
+                [legend]="true"
+                chartType="line"
+            ></canvas>
+        </div>
+    </div>
+</div>

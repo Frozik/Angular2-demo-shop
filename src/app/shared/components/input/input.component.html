@@ -1,0 +1,15 @@
+<div class="input input--theme-default input--size-default">
+    <h4
+        *ngIf="!!caption"
+        class="input__caption"
+    >{{
+        caption
+    }}</h4>
+
+    <input
+        type="text"
+        class="input__control"
+        [ngModel]="value"
+        (ngModelChange)="changed.emit($event)"
+    >
+</div>

@@ -1,0 +1,55 @@
+@import "./../../styles/colors.scss";
+@import "./../../styles/box-model.scss";
+
+.input {
+    box-sizing: border-box;
+}
+
+    .input--theme-default {
+        $input-title-color: $text-primary-color;
+        $input-text-color: $primary-text-color;
+        $input-light-color: $light-primary-background-color;
+        $input-dark-color: $default-primary-background-color;
+
+        .input__caption {
+            color: $input-title-color;
+        }
+
+        .input__control {
+            border-color: $input-light-color;
+            background-color: $input-dark-color;
+            color: $input-text-color;
+        }
+    }
+    
+    .input--size-default {
+        $input-font-size: 16px;
+        $input-border-size: 1px;
+        $input-text-padding: $padding-size;
+
+        $input-height: $input-font-size + $input-border-size * 2;
+
+        .input__caption {
+            margin: 0 0 $input-text-padding 0;
+        }
+
+        .input__control {
+            padding: $input-text-padding / 2 $input-text-padding;
+
+            border-width: $input-border-size;
+            border-radius: $input-border-size;
+            font-size: $input-font-size;
+        }
+    }
+
+    .input__control {
+        box-sizing: border-box;
+
+        width: 100%;
+
+        border-style: solid;
+
+        &:focus {
+            outline: none;
+        }
+    }

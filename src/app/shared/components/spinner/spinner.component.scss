@@ -1,0 +1,43 @@
+@import "./../../styles/colors.scss";
+@import "./../../styles/box-model.scss";
+
+.spinner {
+    box-sizing: border-box;
+
+    border-radius: 50%;
+    border-style: solid;
+    overflow: hidden;
+
+    animation: spinner-rotation 1.1s infinite linear;
+
+    &.spinner--theme-default {
+        $spinner-color: $dark-primary-background-color;
+
+        border-top-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: $spinner-color;
+        border-left-color: $spinner-color;
+    }
+
+    &.spinner--size-default {
+        $spinner-size: 32px;
+        $spinner-border-size: 3px;
+        $spinner-padding-size: $padding-size;
+
+        margin: $spinner-padding-size auto;
+
+        width: $spinner-size;
+        height: $spinner-size;
+
+        border-width: $spinner-border-size;
+    }
+    
+    @keyframes spinner-rotation {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}

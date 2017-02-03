@@ -1,0 +1,23 @@
+<app-progress
+    *ngIf="
+        (products | async) === null ||
+            (categories | async) === null ||
+            (fetching | async)
+    "
+></app-progress>
+
+<article class="product-list">
+    <ul class="list">
+        <li
+            *ngFor="let product of products | async"
+            class="list-item"
+        >
+            <app-product
+                class="product-item"
+                [product]="product"
+                (click)="showProductDetails(product)"
+            ></app-product>
+        </li>
+        <li #endOfListMarker class="list-item"></li>
+   </ul>
+</article>

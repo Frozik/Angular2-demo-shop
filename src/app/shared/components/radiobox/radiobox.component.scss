@@ -1,0 +1,96 @@
+@import "./../../styles/colors.scss";
+@import "./../../styles/box-model.scss";
+
+$transition: all .2s;
+
+.radiobox {
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+    .radiobox--theme-default {
+        $radiobox-title-color: $text-primary-color;
+        $radiobox-text-color: $primary-text-color;
+        $radiobox-light-color: $light-primary-background-color;
+        $radiobox-dark-color: $default-primary-background-color;
+
+        .radiobox__caption {
+            color: $radiobox-title-color;
+        }
+
+        .radiobox__item {
+            &::before {
+                border-color: $radiobox-light-color;
+                background-color: $radiobox-light-color;
+            }
+
+            &:hover::before {
+                border-color: $radiobox-dark-color;
+            }
+        }
+
+            .radiobox__item--checked::before {
+                background-color: $radiobox-dark-color;
+            }
+
+        .radiobox__item__label {
+            color: $radiobox-text-color;
+        }
+    }
+    
+    .radiobox--size-default {
+        $radiobox-size: 30px;
+        $radiobox-font-size: 16px;
+        $radiobox-border-size: 3px;
+        $radiobox-text-padding: $padding-size;
+
+
+        .radiobox__caption {
+            margin: 0 0 $radiobox-text-padding 0;
+        }
+
+        .radiobox__item {
+            margin-left: $radiobox-text-padding;
+
+            height: $radiobox-size;
+
+            &:first-of-type {
+                margin-left: 0;
+            }
+
+            &::before {
+                margin-right: $radiobox-text-padding;
+
+                height: $radiobox-size;
+                width: $radiobox-size;
+
+                border-width: $radiobox-border-size;
+            }
+        }
+
+            .radiobox__item--checked::before {
+                
+            }
+
+            .radiobox__item__label {
+                font-size: $radiobox-font-size;
+                line-height: $radiobox-size;
+            }
+    }
+
+    .radiobox__item {
+        box-sizing: border-box;
+        display: inline-block;
+
+        &::before {
+            content: "";
+
+            display: block;
+            float: left;
+
+            border-radius: 50%;
+            border-style: solid;
+
+            transition: $transition;
+        }
+    }

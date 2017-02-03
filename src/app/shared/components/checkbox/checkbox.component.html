@@ -1,0 +1,22 @@
+<div class="checkbox checkbox--theme-default checkbox--size-default">
+    <h4
+        *ngIf="!!caption"
+        class="checkbox__caption"
+    >{{
+        caption
+    }}</h4>
+
+    <div
+        class="checkbox__control"
+        [ngClass]="{ 'checked': checked }"
+        (click)="checked = !checked;checkedChanged.emit(checked)"
+    ></div>
+
+    <span
+        *ngIf="!!text"
+        class="checkbox__label"
+        (click)="checked = !checked;checkedChanged.emit(checked)"
+    >{{
+        text
+    }}</span>
+</div>

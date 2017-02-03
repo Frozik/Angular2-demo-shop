@@ -1,0 +1,41 @@
+<div class="range range--theme-default range--size-default">
+    <h4
+        *ngIf="!!caption"
+        class="range__caption"
+    >{{
+        caption
+    }}</h4>
+
+    <div class="range__control">
+        <div #range class="range__control__measure"></div>
+        <div
+            *ngIf="leftPosition !== null"
+            class="range__control__selector"
+            [ngClass]="{
+                'range__control__selector--tracking': tracking === trackSlider.Left,
+                'range__control__selector--move-top': lastTouchedSlider === trackSlider.Left
+            }"
+            (mousedown)="mouseDown(trackSlider.Left)"
+            [style.left.px]="leftPosition * range.offsetWidth"
+        ></div>
+        <div
+            *ngIf="rightPosition !== null"
+            class="range__control__selector"
+            [ngClass]="{
+                'range__control__selector--tracking': tracking === trackSlider.Right,
+                'range__control__selector--move-top': lastTouchedSlider === trackSlider.Right
+            }"
+            (mousedown)="mouseDown(trackSlider.Right)"
+            [style.left.px]="rightPosition * range.offsetWidth"
+        ></div>
+    </div>
+
+    <div class="range__details">
+        <div class="range__details__left">{{
+            getRealValueByPosition(leftPosition)
+        }}</div>
+        <div class="range__details__right">{{
+            getRealValueByPosition(rightPosition)
+        }}</div>
+    </div>
+</div>

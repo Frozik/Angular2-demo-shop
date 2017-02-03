@@ -1,0 +1,36 @@
+<div
+    *ngIf="(sellState | async) !== sellStateType.Selling"
+    class="controls-block"
+>
+    <button
+        *ngIf="product.count - product.soldCount > 0"
+        class="button"
+        (click)="buy()"
+    >
+        Buy
+        <span *ngIf="(sellState | async) === sellStateType.Sold">
+            more
+        </span>
+    </button>
+    
+    <span
+        *ngIf="(sellState | async) === sellStateType.Sold"
+        class="sold"
+    >
+        Your purchase will be delivered soon
+    </span>
+
+    <span
+        *ngIf="(sellState | async) === sellStateType.Error"
+        class="sold-out"
+    >
+        Sorry, nothing left
+    </span>
+</div>
+
+<div
+    *ngIf="(sellState | async) === sellStateType.Selling"
+    class="controls-block"
+>
+    <app-spinner></app-spinner>
+</div>

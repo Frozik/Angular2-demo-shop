@@ -1,0 +1,64 @@
+<div *ngIf="loading" class="product-filter">
+    <app-spinner></app-spinner>
+</div>
+
+<div *ngIf="!loading" class="product-filter">
+    <div class="filter-group">
+        <app-checkbox
+            class="filter-item"
+            caption="Availability"
+            text="Available only"
+            (checkedChanged)="availabilitySubject.next($event)"
+            [checked]="(initialFilter | async).availableOnly"
+        ></app-checkbox>
+
+        <app-radiobox
+            class="filter-item"
+            caption="Gender"
+            [items]="genderItems"
+            keyProperty="value"
+            displayProperty="display"
+            [selectedKey]="(initialFilter | async).gender"
+            (change)="genderSubject.next($event)"
+        ></app-radiobox>
+
+        <app-select
+            caption="Category"
+            class="filter-item"
+            [items]="(categories | async).concat([{ id: null, name: 'None' }])"
+            keyProperty="id"
+            displayProperty="name"
+            [selectedKey]="(initialFilter | async).categoryId"
+            (changed)="categoryIdSubject.next($event)"
+        ></app-select>
+
+        <app-range
+            class="filter-item"
+            caption="Rating"
+            [min]="0"
+            [max]="5"
+            [step]="1"
+            [left]="(initialFilter | async).rating.min"
+            [right]="(initialFilter | async).rating.max"
+            (change)="ratingSubject.next($event)"
+        ></app-range>
+
+        <app-range
+            class="filter-item"
+            caption="Price"
+            [min]="0"
+            [max]="1000"
+            [step]="10"
+            [left]="(initialFilter | async).price.min"
+            [right]="(initialFilter | async).price.max"
+            (change)="priceSubject.next($event)"
+        ></app-range>
+
+        <app-input
+            caption="Text filter"
+            class="filter-item"
+            [value]="(initialFilter | async).text"
+            (changed)="textSubject.next($event)"
+        ></app-input>
+    </div>
+</div>

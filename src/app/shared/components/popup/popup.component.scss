@@ -1,0 +1,149 @@
+@import "./../../styles/colors.scss";
+@import "./../../styles/box-model.scss";
+
+.modal {
+    box-sizing: border-box;
+    display: block;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    overflow: auto;
+}
+
+    .modal--theme-default {
+        $modal-title-color: $text-primary-color;
+        $modal-text-color: $primary-text-color;
+        $modal-light-color: $light-primary-background-color;
+        $modal-dark-color: $default-primary-background-color;
+        $modal-paranja-color: rgba(0, 0, 0, 0.4);
+
+        &.modal {
+            background-color: $modal-paranja-color;
+        }
+
+        .modal__content {
+            background-color: $modal-light-color;
+        }
+
+            .modal__content__header {
+                background-color: $modal-dark-color;
+                color: $modal-title-color;
+            }
+
+                .modal__content__header__close {
+                    color: $modal-text-color;
+                    font-weight: bold;
+
+                    &:hover {
+                        color: $modal-title-color;
+                        text-shadow: 2px 2px 2px $modal-paranja-color;
+                    }
+                }
+
+                .modal__content__header__title {
+                    font-weight: bold;
+                }
+
+            .modal__content__footer {
+                background-color: $modal-dark-color;
+                color: $modal-text-color;
+            }
+    }
+    
+    .modal--size-default {
+        $modal-header-height: 50px;
+        $modal-font-size: 16px;
+        $modal-text-padding: $padding-size;
+        $modal-content-padding: $block-margin-size;
+
+        .modal__content {
+            width: 60%;
+            min-width: 640px;
+            max-width: 1024px;
+        }
+
+            .modal__content__header {
+                padding: $modal-text-padding / 2 $modal-text-padding;
+
+                height: $modal-header-height;
+
+                font-size: $modal-font-size;
+            }
+
+                .modal__content__header__close {
+                    font-size: 1.5em;
+                    line-height: $modal-header-height - $modal-text-padding;
+                }
+
+                .modal__content__header__title {
+                    padding-right: $modal-text-padding;
+
+                    line-height: $modal-header-height - $modal-text-padding;
+                }
+
+            .modal__content__body {
+                padding: $modal-content-padding;
+            }
+
+            .modal__content__footer {
+                padding: $modal-text-padding / 2 $modal-content-padding;
+            }
+    }
+
+    .modal__content {
+        box-sizing: border-box;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        margin: auto;
+
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, .5);
+        overflow: hidden;
+        transform: translateY(-50%);
+
+        animation-name: modal-drop-from-top;
+        animation-duration: .5s;
+
+        @keyframes modal-drop-from-top {
+            from {
+                top: 0%;
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                top: 50%;
+                transform: translateY(-50%);
+                opacity: 1;
+            }
+        }
+    }
+
+        .modal__content__header {
+            box-sizing: border-box;
+        }
+
+            .modal__content__header__close {
+                float: right;
+
+                cursor: pointer;
+            }
+
+            .modal__content__header__title {
+                margin: 0;
+
+                white-space: nowrap;
+                word-wrap: normal;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+
+        .modal__content__footer__block {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }

@@ -1,0 +1,152 @@
+@import "./../../styles/colors.scss";
+@import "./../../styles/box-model.scss";
+
+$transition: all .2s ease-in-out;
+
+.range {
+    box-sizing: border-box;
+
+    user-select: none;
+    overflow: hidden;
+}
+
+    .range--theme-default {
+        $range-title-color: $text-primary-color;
+        $range-text-color: $primary-text-color;
+        $range-light-color: $light-primary-background-color;
+        $range-dark-color: $default-primary-background-color;
+
+        .range__caption {
+            color: $range-title-color;
+        }
+
+        .range__control {
+            background-color: $range-light-color;
+
+            &::before {
+                background-color: $range-light-color;
+            }
+
+            &::after {
+                background-color: $range-light-color;
+            }
+        }
+
+            .range__control__selector {
+                border-color: $range-light-color;
+                background-color: $range-light-color;
+
+                &:hover {
+                    background-color: $range-dark-color;
+                }
+            }
+
+                .range__control__selector--tracking {
+                    border-color: $range-dark-color;
+                    background-color: $range-dark-color;
+                }
+
+            .range__details {
+                color: $range-text-color;
+            }
+    }
+    
+    .range--size-default {
+        $range-height: 30px;
+        $range-font-size: 16px;
+        $range-line-height: $range-height / 5;
+        $range-border-size: 3px;
+        $range-text-padding: $padding-size;
+
+        .range__caption {
+            margin: 0 0 ($range-text-padding + ($range-height - $range-line-height) / 2) 0;
+        }
+
+        .range__control {
+            margin: ($range-height - $range-line-height) / 2 $range-line-height;
+
+            height: $range-line-height;
+
+            &::before {
+                left: -$range-line-height;
+
+                width: $range-line-height;
+                height: $range-line-height;
+            }
+
+            &::after {
+                right: -$range-line-height;
+
+                width: $range-line-height;
+                height: $range-line-height;
+            }
+        }
+
+            .range__control__measure {
+                margin: 0 $range-height / 2;
+            }
+
+            .range__control__selector {
+                top: $range-border-size - $range-height / 2;
+
+                width: $range-height;
+                height: $range-height;
+
+                border-width: $range-border-size;
+            }
+
+        .range__details {
+            font-size: $range-font-size;
+        }
+
+        .range__details__left, .range__details__right {
+            margin: $range-text-padding / 2 ($range-height - $range-line-height) / 2;
+        }
+    }
+
+    .range__control {
+        box-sizing: border-box;
+        position: relative;
+
+        &::before {
+            content: "";
+
+            box-sizing: border-box;
+            position: absolute;
+
+            border-top-left-radius: 50%;
+            border-bottom-left-radius: 50%;
+        }
+
+        &::after {
+            content: "";
+
+            box-sizing: border-box;
+            position: absolute;
+
+            border-top-right-radius: 50%;
+            border-bottom-right-radius: 50%;
+        }
+    }
+        .range__control__selector {
+            box-sizing: border-box;
+            position: absolute;
+
+            cursor: pointer;
+            border-radius: 50%;
+            border-style: solid;
+
+            transition: $transition;
+        }
+
+            .range__control__selector--move-top {
+                z-index: 1;
+            }
+
+        .range__details__left {
+            float: left;
+        }
+
+        .range__details__right {
+            float: right;
+        }

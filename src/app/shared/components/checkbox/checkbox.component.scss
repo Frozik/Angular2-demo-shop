@@ -1,0 +1,107 @@
+@import "./../../styles/colors.scss";
+@import "./../../styles/box-model.scss";
+
+$transition: all .2s;
+
+.checkbox {
+    display: inline-block;
+
+    box-sizing: border-box;
+}
+
+    .checkbox--theme-default {
+        $checkbox-title-color: $text-primary-color;
+        $checkbox-text-color: $primary-text-color;
+        $checkbox-light-color: $light-primary-background-color;
+        $checkbox-dark-color: $default-primary-background-color;
+
+        .checkbox__caption {
+            color: $checkbox-title-color;
+        }
+
+        .checkbox__control {
+            background-color: $checkbox-light-color;
+            border-color: $checkbox-light-color;
+
+            &::before {
+                background: $checkbox-dark-color;
+            }
+
+            &.checked {
+                background-color: $checkbox-dark-color;
+
+                &::before {
+                    background: $checkbox-light-color;
+                }
+            }
+        }
+
+        .checkbox__label {
+            color: $checkbox-text-color;
+        }
+    }
+    
+    .checkbox--size-default {
+        $checkbox-base-width: 70px;
+        $checkbox-base-height: 30px;
+        $checkbox-border-size: 2px;
+        $checkbox-font-size: 16px;
+        $checkbox-text-padding: $padding-size;
+
+        $checkbox-width: $checkbox-base-width + $checkbox-border-size * 2;
+        $checkbox-height: $checkbox-base-height + $checkbox-border-size * 2;
+        $checkbox-nested-box-size: $checkbox-height - $checkbox-border-size * 4;
+
+        .checkbox__caption {
+            margin: 0 0 $checkbox-text-padding 0;
+        }
+
+        .checkbox__control {
+            width: $checkbox-width;
+            height: $checkbox-height;
+
+            border-radius: $checkbox-border-size;
+            border-width: $checkbox-border-size;
+
+            &::before {
+                margin: $checkbox-border-size;
+
+                width: $checkbox-nested-box-size;
+                height: $checkbox-nested-box-size;
+
+                border-radius: $checkbox-border-size;
+            }
+
+            &.checked::before {
+                margin-left: $checkbox-width - $checkbox-nested-box-size - 3 * $checkbox-border-size;
+            }
+        }
+
+        .checkbox__label {
+            font-size: $checkbox-font-size;
+            line-height: $checkbox-height;
+            padding-left: $checkbox-text-padding;
+        }
+    }
+
+    .checkbox__control {
+        float: left;
+        box-sizing: border-box;
+
+        border-style: solid;
+
+        transition: $transition;
+
+        &::before {
+            content: "";
+
+            display: inline-block;
+            box-sizing: border-box;
+
+            transition: $transition;
+        }
+    }
+
+    .checkbox__label {
+        float: left;
+    }

@@ -1,0 +1,67 @@
+@import "./../../styles/colors.scss";
+@import "./../../styles/box-model.scss";
+
+.select {
+    box-sizing: border-box;
+}
+
+    .select--theme-default {
+        $select-title-color: $text-primary-color;
+        $select-text-color: $primary-text-color;
+        $select-light-color: $light-primary-background-color;
+        $select-dark-color: $default-primary-background-color;
+
+        .select__caption {
+            color: $select-title-color;
+        }
+
+        .select__control {
+            border-color: $select-light-color;
+            background-color: $select-dark-color;
+            color: $select-text-color;
+            background-image: url(
+                "data:image/svg+xml;base64,CjxzdmcgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDEwMDAgMTAwMCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMTAwMCAxMDAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPG1ldGFkYXRhPiBTdmcgVmVjdG9yIEljb25zIDogaHR0cDovL3d3dy5vbmxpbmV3ZWJmb250cy5jb20vaWNvbiA8L21ldGFkYXRhPgogIDxnPjxwYXRoIGQ9Ik04NTAsNjQwTDUwMCw5OTBMMTUwLDY0MEg4NTB6IiBzdHlsZT0iZmlsbDojRkZGRkZGIj48L3BhdGg+PHBhdGggZD0iTTg1MCwzNjBMNTAwLDEwTDE1MCwzNjBIODUweiIgc3R5bGU9ImZpbGw6I0ZGRkZGRiI+PC9wYXRoPjwvZz48L3N2Zz4KICA="
+            );
+            
+        }
+    }
+    
+    .select--size-default {
+        $select-font-size: 16px;
+        $select-border-size: 1px;
+        $select-text-padding: $padding-size;
+
+        $select-height: $select-font-size + $select-border-size * 2;
+
+        .select__caption {
+            margin: 0 0 $select-text-padding 0;
+        }
+
+        .select__control {
+            padding:
+                $select-text-padding / 2
+                $select-text-padding * 3 / 2 + $select-font-size
+                $select-text-padding / 2
+                $select-text-padding;
+
+            border-width: $select-border-size;
+            border-radius: $select-border-size;
+            font-size: $select-font-size;
+            background-size: $select-font-size $select-font-size;
+            background-position: right $select-text-padding / 2 center;
+        }
+    }
+
+    .select__control {
+        box-sizing: border-box;
+
+        width: 100%;
+
+        appearance: none;
+        text-overflow: ellipsis;
+        background-repeat: no-repeat;
+
+        &:focus {
+            outline: none;
+        }
+    }

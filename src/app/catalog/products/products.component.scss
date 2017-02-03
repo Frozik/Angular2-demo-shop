@@ -1,0 +1,150 @@
+@import "./../../shared/styles/colors.scss";
+@import "./../../shared/styles/box-model.scss";
+
+$sidebar-width: 420px;
+$padding: 10px;
+$action-height: 40px;
+$action-border: 1px;
+$action-icon-size: 32px;
+
+$light-color: #aeaeae;
+$dark-color: rgba(51, 51, 51, .95);
+$litest-color: #fff;
+
+
+$transition: left .2s ease-in-out;
+
+.product-page {
+    width: 100%;
+
+    overflow-x: hidden;
+
+    .layout {
+        position: relative;
+        left: 0;
+
+        transition: $transition;
+
+        .navigation-bar {
+            padding: $padding 0;
+
+            width: 100%;
+
+            background: $dark-color;
+            overflow: auto;
+
+            .action {
+                display: block;
+                float: left;
+                margin-left: 2 * $padding;
+
+                height: $action-height;
+
+                border: $action-border solid $light-color;
+                line-height: $action-height;
+                color: $litest-color;
+
+                &:hover {
+                    border: $action-border solid $litest-color;
+                }
+            }
+
+            .show-filter {
+                width: 100px;
+
+                background-image: url(
+                    "data:image/svg+xml;base64, PHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDMyIDMyIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAzMiAzMiIgaGVpZ2h0PSIzMiIgd2lkdGg9IjMyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPHBhdGggaWQ9IlZpc2l0cyIgZmlsbD0iI2ZmZiIgZD0iTTQsNGw4LDEydjEybDgtN3YtNWw4LTEySDR6Ii8+Cjwvc3ZnPg=="
+                );
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-size: $action-icon-size $action-icon-size;
+            }
+
+            .button-texted {
+                padding: 0 $padding 0 $action-icon-size + 2 * $padding;
+                
+                background-repeat: no-repeat;
+                background-position: left $padding center;
+                background-size: $action-icon-size $action-icon-size;
+
+                &.add-category {
+                    background-image: url(
+                        "data:image/svg+xml;base64,CjxzdmcgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDEwMDAgMTAwMCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMTAwMCAxMDAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPG1ldGFkYXRhPiBTdmcgVmVjdG9yIEljb25zIDogaHR0cDovL3d3dy5vbmxpbmV3ZWJmb250cy5jb20vaWNvbiA8L21ldGFkYXRhPgogIDxnPjxnPjxwYXRoIGQ9Ik05OTAsNTY5LjFINTY5LjFWOTkwSDQzMC45VjU2OS4xSDEwVjQzMC45aDQyMC45VjEwaDEzOC4xdjQyMC45SDk5MFY1NjkuMXoiIHN0eWxlPSJmaWxsOiNGRkZGRkYiPjwvcGF0aD48L2c+PC9nPjwvc3ZnPgogIA=="
+                    );
+                }
+
+                &.delete-category {
+                    background-image: url(
+                        "data:image/svg+xml;base64,CjxzdmcgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDEwMDAgMTAwMCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMTAwMCAxMDAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPG1ldGFkYXRhPiBTdmcgVmVjdG9yIEljb25zIDogaHR0cDovL3d3dy5vbmxpbmV3ZWJmb250cy5jb20vaWNvbiA8L21ldGFkYXRhPgogIDxnPjxwYXRoIGQ9Ik0xMCw0MTguNnYxNjIuOGg5ODBWNDE4LjZIMTB6IiBzdHlsZT0iZmlsbDojRkZGRkZGIj48L3BhdGg+PC9nPjwvc3ZnPgogIA=="
+                    );
+                }
+            }
+        }
+    }
+
+    .sidebar {
+        position: fixed;
+        left: -$sidebar-width;
+        top: 0;
+        bottom: 0;
+
+        width: $sidebar-width;
+
+        background: $dark-color;
+        z-index: 110;
+
+        transition: $transition;
+    }
+
+    .overlay {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+
+        background: rgba(0, 0, 0, .7);
+
+        z-index: 100;
+    }
+
+    &.sidebar-shown {
+        .layout {
+            left: $sidebar-width;
+        }
+
+        .sidebar {
+            left: 0;
+        }
+
+        .overlay {
+            display: block;
+        }
+    }
+}
+
+.clear {
+    clear: both;
+}
+
+.popup {
+    fieldset {
+        margin: 0;
+        padding: 0;
+
+        border: none;
+
+        .input {
+            margin: 10px 0;
+
+            label {
+                display: inline-block;
+
+                width: 140px;
+
+                vertical-align: top;
+            }
+        }
+    }
+}
