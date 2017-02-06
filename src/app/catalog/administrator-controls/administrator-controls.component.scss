@@ -1,10 +1,12 @@
+@import "./../../shared/styles/box-model.scss";
+
 .controls-block {
-    margin: 20px 0;
+    margin: $block-margin-size 0;
     
     .action-text .action-link {
         cursor: pointer;
         color: #3F51B5;
-        border-bottom: 1px dashed #3F51B5;
+        border-bottom: $block-border-size dashed #3F51B5;
     }
 
 }
@@ -29,7 +31,7 @@
         border: none;
 
         .input {
-            margin: 10px 0;
+            margin: $padding-size 0;
 
             &.rating select {
                 width: 100px;
@@ -59,6 +61,7 @@
 
     .image-preview {
         display: table-cell;
+        padding-left: $padding-size;
 
         width: 300px;
         

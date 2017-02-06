@@ -10,10 +10,10 @@ $transition: all .2s;
 }
 
     .checkbox--theme-default {
-        $checkbox-title-color: $text-primary-color;
-        $checkbox-text-color: $primary-text-color;
-        $checkbox-light-color: $light-primary-background-color;
-        $checkbox-dark-color: $default-primary-background-color;
+        $checkbox-title-color: $controls-caption-color;
+        $checkbox-text-color: $controls-text-color;
+        $checkbox-light-color: $controls-light-primary-background-color;
+        $checkbox-dark-color: $controls-default-primary-background-color;
 
         .checkbox__caption {
             color: $checkbox-title-color;

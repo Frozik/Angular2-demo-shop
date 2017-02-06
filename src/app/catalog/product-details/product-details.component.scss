@@ -1,13 +1,8 @@
-@import "./../../shared/styles/links.scss";
+@import "./../../shared/styles/box-model.scss";
+@import "./../../shared/styles/colors.scss";
 
-$padding: 10px;
 $mobile-view-width: 600px;
 $max-width: 1400px;
-
-
-$light-color: #aeaeae;
-$dark-color: rgb(51, 51, 51);
-$box-color: #fff;
 
 .product-details {
     margin: 0 auto;
@@ -15,8 +10,8 @@ $box-color: #fff;
     width: 100%;
     max-width: $max-width;
 
-    background-color: $box-color;
-    color: $dark-color;
+    background-color: $primary-color-light;
+    color: $primary-text-color;
 
     &.loading {
         app-spinner {
@@ -27,12 +22,19 @@ $box-color: #fff;
     }
 
     .menu {
-        padding: $padding;
+        padding: $padding-size;
 
         width: 100%;
 
-        background: $dark-color;
-        color: $light-color;
+        background: $primary-color;
+        color: $primary-color-text;
+
+        .action {
+            cursor: pointer;
+            color: $primary-color-text;
+            padding-bottom: 2px;
+            border-bottom: $block-border-size dashed $primary-color-text;
+        }
     }
 
     .product-info {
@@ -56,7 +58,7 @@ $box-color: #fff;
         }
 
         .left {
-            background-color: $box-color;
+            background-color: lighten($primary-color-light, 20%);
             line-height: 0;
 
             img {
@@ -66,9 +68,9 @@ $box-color: #fff;
         }
 
         .right {
-            padding: 2 * $padding;
+            padding: 2 * $padding-size;
 
-            background-color: $light-color;
+            background-color: $primary-color-light;
 
             h3 {
                 font-family: "Open Sans", sans-serif;
@@ -113,7 +115,7 @@ $box-color: #fff;
                     li {
                         display: block;
                         float: left;
-                        margin-left: $padding / 2;
+                        margin-left: $padding-size / 2;
 
                         width: $image-size;
                         height: $image-size;
@@ -132,7 +134,7 @@ $box-color: #fff;
             }
 
             .available, .sold {
-                margin-top: 2 * $padding;
+                margin-top: 2 * $padding-size;
 
                 font-family: "Open Sans", sans-serif;
                 font-weight: 700;

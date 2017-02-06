@@ -21,8 +21,8 @@
 }
 
     .progress--theme-default {
-        $progress-light-color: $accent-background-color;
-        $progress-dark-color: $text-primary-color;
+        $progress-light-color: $controls-accent-background-color;
+        $progress-dark-color: $controls-caption-color;
 
         &.progress {
             background-color: $progress-light-color;

@@ -19,18 +19,14 @@
             class="modal__content__footer"
         >
             <div class="modal__content__footer__block">
-                <button
-                    class="button button--theme-default button--size-default"
-                    (click)="okPressed.emit($event)
-                ">
-                    Ok
-                </button>
-                <button
-                    class="button button--theme-default button--size-default"
-                    (click)="cancelPressed.emit($event)"
-                >
-                    Cancel
-                </button>
+                <app-button
+                    (pressed)="okPressed.emit($event)"
+                    caption="Ok"
+                ></app-button>
+                <app-button
+                    (pressed)="cancelPressed.emit($event)"
+                    caption="Cancel"
+                ></app-button>
             </div>
         </footer>
     </div>

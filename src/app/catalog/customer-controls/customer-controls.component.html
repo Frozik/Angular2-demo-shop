@@ -2,16 +2,11 @@
     *ngIf="(sellState | async) !== sellStateType.Selling"
     class="controls-block"
 >
-    <button
+    <app-button
         *ngIf="product.count - product.soldCount > 0"
-        class="button"
-        (click)="buy()"
-    >
-        Buy
-        <span *ngIf="(sellState | async) === sellStateType.Sold">
-            more
-        </span>
-    </button>
+        (pressed)="buy()"
+        [caption]="'Buy' + ((sellState | async) === sellStateType.Sold ? ' more' : '')"
+    ></app-button>
     
     <span
         *ngIf="(sellState | async) === sellStateType.Sold"

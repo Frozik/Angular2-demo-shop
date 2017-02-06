@@ -9,10 +9,10 @@ $transition: all .2s;
 }
 
     .radiobox--theme-default {
-        $radiobox-title-color: $text-primary-color;
-        $radiobox-text-color: $primary-text-color;
-        $radiobox-light-color: $light-primary-background-color;
-        $radiobox-dark-color: $default-primary-background-color;
+        $radiobox-title-color: $controls-caption-color;
+        $radiobox-text-color: $controls-text-color;
+        $radiobox-light-color: $controls-light-primary-background-color;
+        $radiobox-dark-color: $controls-default-primary-background-color;
 
         .radiobox__caption {
             color: $radiobox-title-color;

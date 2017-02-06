@@ -6,10 +6,10 @@
 }
 
     .select--theme-default {
-        $select-title-color: $text-primary-color;
-        $select-text-color: $primary-text-color;
-        $select-light-color: $light-primary-background-color;
-        $select-dark-color: $default-primary-background-color;
+        $select-title-color: $controls-caption-color;
+        $select-text-color: $controls-text-color;
+        $select-light-color: $controls-light-primary-background-color;
+        $select-dark-color: $controls-default-primary-background-color;
 
         .select__caption {
             color: $select-title-color;

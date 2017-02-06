@@ -1,16 +1,9 @@
-@import "./../../shared/styles/colors.scss";
 @import "./../../shared/styles/box-model.scss";
+@import "./../../shared/styles/colors.scss";
 
 $sidebar-width: 420px;
-$padding: 10px;
-$action-height: 40px;
-$action-border: 1px;
 $action-icon-size: 32px;
-
-$light-color: #aeaeae;
-$dark-color: rgba(51, 51, 51, .95);
-$litest-color: #fff;
-
+$action-height: $action-icon-size + $padding-size;
 
 $transition: left .2s ease-in-out;
 
@@ -26,26 +19,26 @@ $transition: left .2s ease-in-out;
         transition: $transition;
 
         .navigation-bar {
-            padding: $padding 0;
+            padding: $padding-size 0;
 
             width: 100%;
 
-            background: $dark-color;
+            background: $primary-color;
             overflow: auto;
 
             .action {
                 display: block;
                 float: left;
-                margin-left: 2 * $padding;
+                margin-left: $double-padding-size;
 
                 height: $action-height;
 
-                border: $action-border solid $light-color;
+                border: $block-border-size solid $primary-color-light;
                 line-height: $action-height;
-                color: $litest-color;
+                color: $primary-color-text;
 
                 &:hover {
-                    border: $action-border solid $litest-color;
+                    border: $block-border-size solid $primary-color-text;
                 }
             }
 
@@ -61,10 +54,10 @@ $transition: left .2s ease-in-out;
             }
 
             .button-texted {
-                padding: 0 $padding 0 $action-icon-size + 2 * $padding;
+                padding: 0 $padding-size 0 $action-icon-size + 2 * $padding-size;
                 
                 background-repeat: no-repeat;
-                background-position: left $padding center;
+                background-position: left $padding-size center;
                 background-size: $action-icon-size $action-icon-size;
 
                 &.add-category {
@@ -90,7 +83,7 @@ $transition: left .2s ease-in-out;
 
         width: $sidebar-width;
 
-        background: $dark-color;
+        background: transparentize($primary-color-dark, .5);
         z-index: 110;
 
         transition: $transition;
@@ -136,7 +129,7 @@ $transition: left .2s ease-in-out;
         border: none;
 
         .input {
-            margin: 10px 0;
+            margin: $padding-size 0;
 
             label {
                 display: inline-block;

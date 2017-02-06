@@ -1,37 +1,15 @@
+@import "./../../shared/styles/box-model.scss";
+
 .controls-block {
-    margin: 20px 0;
-
-    .button {
-        $button-border: 2px;
-
-        $button-color-light: #EEEEEE;
-        $button-color: #E0E0E0;
-        $button-color-dark: #BDBDBD;
-
-        padding: 5px 50px;
-
-        background-color: $button-color;
-        border-left: $button-border solid $button-color;
-        border-top: $button-border solid $button-color;
-        border-right: $button-border solid $button-color-dark;
-        border-bottom: $button-border solid $button-color-dark;
-        outline: none;
-
-        &:active {
-            border-left: $button-border solid $button-color-light;
-            border-top: $button-border solid $button-color-light;
-            border-right: $button-border solid $button-color;
-            border-bottom: $button-border solid $button-color;
-        }
-    }
+    margin: $block-margin-size 0;
 
     .sold {
         display: block;
 
-        margin-top: 10px;
-        padding: 20px;
+        margin-top: $padding-size;
+        padding: $block-margin-size;
 
-        border: 1px solid #33691E;
+        border: $block-border-size solid #33691E;
         background-color: rgba(51, 105, 30, 0.3);
         font-family: "Open Sans", Helvetica, Arial, sans-serif;
         font-size: 16px;
@@ -43,10 +21,10 @@
     .sold-out {
         display: block;
 
-        margin-top: 10px;
-        padding: 20px;
+        margin-top: $padding-size;
+        padding: $block-margin-size;
 
-        border: 1px solid #BF360C;
+        border: $block-border-size solid #BF360C;
         background-color: rgba(191, 54, 12, 0.3);
         font-family: "Open Sans", Helvetica, Arial, sans-serif;
         font-size: 20px;
