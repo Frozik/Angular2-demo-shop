@@ -1,10 +1,17 @@
-@import "./../../shared/styles/links.scss";
+@import "./../../shared/styles/colors.scss";
 
 .user-menu {
     padding: 10px;
 
     text-align: right;
 
-    background-color: #455A64;
-    color: #aeaeae;
+    background-color: $primary-color-dark;
+    color: $primary-color-text;
+}
+
+.action {
+    cursor: pointer;
+    color: $primary-color-text;
+    padding-bottom: 2px;
+    border-bottom: 1px dashed $primary-color-text;
 }

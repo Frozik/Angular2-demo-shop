@@ -1,8 +1,15 @@
-$dark-primary-background-color: rgb(51, 51, 51);
-$default-primary-background-color: lighten($dark-primary-background-color, 20%);
-$light-primary-background-color: #aeaeae;
-$text-primary-color: #FFFFFF;
-$accent-background-color: #00BCD4;
-$primary-text-color: darken($text-primary-color, 20%);
+$primary-color-dark: #455A64;
+$primary-color: #607D8B;
+$primary-color-light: #CFD8DC;
+$primary-color-text: #FFFFFF;
+$accent-color: #009688;
+$primary-text-color: #212121;
 $secondary-text-color: #757575;
-$divider-border-color: #BDBDBD;
+$divider-color: #BDBDBD;
+
+$controls-dark-primary-background-color: darken($primary-color-dark, 20%);
+$controls-default-primary-background-color: darken($primary-color, 20%);
+$controls-light-primary-background-color: darken($primary-color-light, 20%);
+$controls-caption-color: $primary-color-light;
+$controls-text-color: lighten($primary-color-light, 10%);
+$controls-accent-background-color: $accent-color;

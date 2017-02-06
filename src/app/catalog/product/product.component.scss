@@ -1,6 +1,5 @@
-$padding: 10px;
-
-$font-color: #372f2b;
+@import "./../../shared/styles/box-model.scss";
+@import "./../../shared/styles/colors.scss";
 
 $transition: all .25s ease-in;
 
@@ -14,7 +13,7 @@ $transition: all .25s ease-in;
     
     text-align: left;
     cursor: pointer;
-    background: #fff;
+    background: $primary-color-light;
     overflow: hidden;
 
     &.sold {
@@ -34,8 +33,8 @@ $transition: all .25s ease-in;
             $image-size: 16px;
 
             position: absolute;
-            left: $padding;
-            bottom: $padding;
+            left: $padding-size;
+            bottom: $padding-size;
             margin: 0;
             padding: 0;
 
@@ -50,7 +49,7 @@ $transition: all .25s ease-in;
             li {
                 display: block;
                 float: left;
-                margin-left: $padding / 2;
+                margin-left: $padding-size / 2;
 
                 width: $image-size;
                 height: $image-size;
@@ -70,21 +69,21 @@ $transition: all .25s ease-in;
 
     .product-caption {
         flex: 1 1 100%;
-        padding: 2 * $padding;
+        padding: 2 * $padding-size;
 
         box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
         z-index: 0;
 
         h4 {
             position: relative;
-            margin: 0 0 2 * $padding 0;
-            padding: 0 0 2 * $padding 0;
+            margin: 0 0 2 * $padding-size 0;
+            padding: 0 0 2 * $padding-size 0;
 
             font-family: "Open Sans", sans-serif;
             font-weight: 700;
             font-size: 19px;
             line-height: 25px;
-            color: $font-color;
+            color: $primary-text-color;
             letter-spacing: -1px;
             word-break: break-word;
 
@@ -119,7 +118,9 @@ $transition: all .25s ease-in;
 
     .product-details {
         flex: 0 0 auto;
-        padding: 2 * $padding;
+        padding: 2 * $padding-size;
+
+        background-color: $primary-color;
 
         .price {
             display: block;
@@ -128,7 +129,7 @@ $transition: all .25s ease-in;
             font-family: "Open Sans", Helvetica, Arial, sans-serif;
             font-size: 24px;
             font-weight: 700;
-            color: $font-color;
+            color: $primary-text-color;
             line-height: 26px;
 
             &::before {

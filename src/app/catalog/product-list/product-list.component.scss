@@ -1,3 +1,5 @@
+@import "./../../shared/styles/box-model.scss";
+
 .product-list {
     display: block;
 
@@ -6,7 +8,7 @@
     overflow: hidden;
 
     app-spinner {
-        margin: 20px;
+        margin: $double-padding-size;
 
         display: inline-block;
     }
@@ -26,9 +28,9 @@
             float: left;
             padding: 0;
 
-            margin: 10px;
+            margin: $padding-size;
 
-            width: calc(20% - 2 * 10px);
+            width: calc(20% - #{2 * $padding-size});
 
             .product-item {
                 display: flex;
@@ -38,21 +40,21 @@
         @media screen and ( max-width: 1500px )
         {
             .list-item {
-                width: calc(25% - 2 * 10px);
+                width: calc(25% - #{2 * $padding-size});
             }
         }
 
         @media screen and ( max-width: 1200px )
         {
             .list-item {
-                width: calc(33.333333% - 2 * 10px);
+                width: calc(33.333333% - #{2 * $padding-size});
             }
         }
 
         @media screen and ( max-width: 900px )
         {
             .list-item {
-                width: calc(50% - 2 * 10px);
+                width: calc(50% - #{2 * $padding-size});
             }
         }
 
@@ -72,7 +74,7 @@
 
             .list-item {
                 float: none;
-                margin: 10px 0;
+                margin: $padding-size 0;
 
                 width: 100%;
                 max-width: none;

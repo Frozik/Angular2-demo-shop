@@ -6,10 +6,10 @@
 }
 
     .input--theme-default {
-        $input-title-color: $text-primary-color;
-        $input-text-color: $primary-text-color;
-        $input-light-color: $light-primary-background-color;
-        $input-dark-color: $default-primary-background-color;
+        $input-title-color: $controls-caption-color;
+        $input-text-color: $controls-text-color;
+        $input-light-color: $controls-light-primary-background-color;
+        $input-dark-color: $controls-default-primary-background-color;
 
         .input__caption {
             color: $input-title-color;

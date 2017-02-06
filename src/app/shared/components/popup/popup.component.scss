@@ -15,10 +15,10 @@
 }
 
     .modal--theme-default {
-        $modal-title-color: $text-primary-color;
-        $modal-text-color: $primary-text-color;
-        $modal-light-color: $light-primary-background-color;
-        $modal-dark-color: $default-primary-background-color;
+        $modal-title-color: $primary-text-color;
+        $modal-text-color: $controls-text-color;
+        $modal-light-color: lighten($controls-light-primary-background-color, 10%);
+        $modal-dark-color: lighten($controls-default-primary-background-color, 10%);
         $modal-paranja-color: rgba(0, 0, 0, 0.4);
 
         &.modal {
@@ -91,6 +91,10 @@
 
             .modal__content__footer {
                 padding: $modal-text-padding / 2 $modal-content-padding;
+
+                app-button {
+                    margin: 0 $block-margin-size;
+                }
             }
     }
 

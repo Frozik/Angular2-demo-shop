@@ -1,0 +1,54 @@
+@import "./../../styles/colors.scss";
+@import "./../../styles/box-model.scss";
+
+.button {
+    box-sizing: border-box;
+}
+
+    .button--theme-default {
+        $button-text-color: $controls-caption-color;
+        $button-light-color: $controls-light-primary-background-color;
+        $button-default-color: $controls-default-primary-background-color;
+        $button-dark-color: $controls-dark-primary-background-color;
+
+        color:  $button-text-color;
+
+        &.button {
+            background-color: $button-default-color;
+            border-left-color: $button-light-color;
+            border-top-color: $button-light-color;
+            border-right-color: $button-dark-color;
+            border-bottom-color: $button-dark-color;
+        }
+    }
+    
+    .button--size-default {
+        $button-width: 100px;
+        $button-font-size: 16px;
+        $button-border-size: 2px;
+        $button-small-border-size: 1px;
+        $button-text-padding: $padding-size;
+        $button-padding: $block-margin-size;
+
+        &.button {
+            padding: $button-text-padding / 2 $button-text-padding;
+
+            min-width: $button-width;
+
+            border-top-width: $button-small-border-size;
+            border-left-width: $button-small-border-size;
+            border-right-width: $button-border-size;
+            border-bottom-width: $button-border-size;
+
+            &:active {
+                border-right-width: $button-small-border-size;
+                border-bottom-width: $button-small-border-size;
+            }
+        }
+    }
+
+    .button {
+        border-style: solid;
+        user-select: none;
+        outline: none;
+    }

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { InputComponent } from './components/input/input.component';
 import { PopupComponent } from './components/popup/popup.component';
@@ -30,6 +31,7 @@ import { ToFixedPipe } from './pipes/to-fixed.pipe';
         SelectComponent,
         RangeComponent,
         InputComponent,
+        ButtonComponent,
     ],
     providers: [NumberPipe],
     exports: [
@@ -46,6 +48,7 @@ import { ToFixedPipe } from './pipes/to-fixed.pipe';
         SelectComponent,
         RangeComponent,
         InputComponent,
+        ButtonComponent,
     ],
 })
 export class SharedModule { }
