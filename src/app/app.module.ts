@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { NgReduxModule } from 'ng2-redux';
 
 import { AppRoutingModule } from './app-routing.module';
+import { AppActions } from './app.actions';
 import { AppComponent } from './app/app.component';
 import { AuthModule } from './auth/auth.module';
 import { CatalogModule } from './catalog/catalog.module';
@@ -19,5 +20,6 @@ import { SharedModule } from './shared/shared.module';
     ],
     declarations: [AppComponent],
     bootstrap: [AppComponent],
+    providers: [AppActions],
 })
 export class AppModule { }

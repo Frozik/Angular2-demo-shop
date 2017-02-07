@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 
+import { AppActions } from './../../app.actions';
 import { AuthService } from './../auth.service';
 
 @Component({
@@ -15,7 +16,11 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     private readonly subscriptions: Subscription[] = [];
 
-    constructor(private authService: AuthService, private formBuilder: FormBuilder) { }
+    constructor(
+        private authService: AuthService,
+        private formBuilder: FormBuilder,
+        private appActions: AppActions,
+    ) { }
 
     ngOnInit() {
         this.form = this.formBuilder.group({
@@ -39,6 +44,8 @@ export class LoginComponent implements OnInit, OnDestroy {
             first().
             subscribe((successfullyLoggedIn) => {
                 if (successfullyLoggedIn) {
+                    this.appActions.resetCache();
+
                     this.authService.navigateFromLogin();
 
                     return;

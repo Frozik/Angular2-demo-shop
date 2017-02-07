@@ -1,3 +1,4 @@
+import { AppActions } from './../app.actions';
 import { CatalogActions } from './../catalog/catalog.actions';
 import { IPayloadAction } from './../redux-action.type';
 
@@ -18,6 +19,9 @@ export function chartReducer(
     const { type, payload } = action;
 
     switch (type) {
+        case AppActions.ResetCache:
+            return initialState;
+
         case CatalogActions.ClearChartDataSets:
             return {
                 soldByCategory: null,

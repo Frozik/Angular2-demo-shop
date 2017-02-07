@@ -1,3 +1,4 @@
+import { AppActions } from './../app.actions';
 import { CatalogActions } from './../catalog/catalog.actions';
 import { ICategory } from './../catalog/models';
 import { IPayloadAction } from './../redux-action.type';
@@ -17,6 +18,9 @@ export function persistentReducer(
     const { type, payload } = action;
 
     switch (type) {
+        case AppActions.ResetCache:
+            return initialState;
+
         case CatalogActions.StoreCategories:
             return {
                 categories: payload as ICategory[],

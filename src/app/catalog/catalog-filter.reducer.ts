@@ -1,3 +1,4 @@
+import { AppActions } from './../app.actions';
 import { CatalogActions } from './../catalog/catalog.actions';
 import { IProduct, IProductFilter } from './../catalog/models';
 import { IPayloadAction } from './../redux-action.type';
@@ -34,6 +35,9 @@ export function filterReducer(
     const { type, payload } = action;
 
     switch (type) {
+        case AppActions.ResetCache:
+            return initialState;
+
         case CatalogActions.ClearProducts:
             return {
                 filter: state.filter,
