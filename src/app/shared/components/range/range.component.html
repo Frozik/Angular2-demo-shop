@@ -1,10 +1,5 @@
 <div class="range range--theme-default range--size-default">
-    <h4
-        *ngIf="!!caption"
-        class="range__caption"
-    >{{
-        caption
-    }}</h4>
+    <app-control-caption [caption]="caption"></app-control-caption>
 
     <div class="range__control">
         <div #range class="range__control__measure"></div>

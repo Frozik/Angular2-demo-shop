@@ -11,14 +11,9 @@ $transition: all .2s ease-in-out;
 }
 
     .range--theme-default {
-        $range-title-color: $controls-caption-color;
         $range-text-color: $controls-text-color;
         $range-light-color: $controls-light-primary-background-color;
         $range-dark-color: $controls-default-primary-background-color;
-
-        .range__caption {
-            color: $range-title-color;
-        }
 
         .range__control {
             background-color: $range-light-color;
@@ -57,10 +52,6 @@ $transition: all .2s ease-in-out;
         $range-line-height: $range-height / 5;
         $range-border-size: 3px;
         $range-text-padding: $padding-size;
-
-        .range__caption {
-            margin: 0 0 ($range-text-padding + ($range-height - $range-line-height) / 2) 0;
-        }
 
         .range__control {
             margin: ($range-height - $range-line-height) / 2 $range-line-height;

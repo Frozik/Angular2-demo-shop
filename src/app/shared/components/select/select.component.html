@@ -1,11 +1,6 @@
 <div class="select select--theme-default select--size-default">
-    <h4
-        *ngIf="!!caption"
-        class="select__caption"
-    >{{
-        caption
-    }}</h4>
-        
+    <app-control-caption [caption]="caption"></app-control-caption>
+
     <select
         (change)="valueChanged($event.target.value)"
         class="select__control"

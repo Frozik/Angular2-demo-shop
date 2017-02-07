@@ -6,14 +6,9 @@
 }
 
     .input--theme-default {
-        $input-title-color: $controls-caption-color;
         $input-text-color: $controls-text-color;
         $input-light-color: $controls-light-primary-background-color;
         $input-dark-color: $controls-default-primary-background-color;
-
-        .input__caption {
-            color: $input-title-color;
-        }
 
         .input__control {
             border-color: $input-light-color;
@@ -28,10 +23,6 @@
         $input-text-padding: $padding-size;
 
         $input-height: $input-font-size + $input-border-size * 2;
-
-        .input__caption {
-            margin: 0 0 $input-text-padding 0;
-        }
 
         .input__control {
             padding: $input-text-padding / 2 $input-text-padding;

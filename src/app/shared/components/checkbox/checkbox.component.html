@@ -1,10 +1,5 @@
 <div class="checkbox checkbox--theme-default checkbox--size-default">
-    <h4
-        *ngIf="!!caption"
-        class="checkbox__caption"
-    >{{
-        caption
-    }}</h4>
+    <app-control-caption [caption]="caption"></app-control-caption>
 
     <div
         class="checkbox__control"

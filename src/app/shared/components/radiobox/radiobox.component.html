@@ -1,10 +1,5 @@
 <div class="radiobox radiobox--theme-default radiobox--size-default">
-    <h4
-        *ngIf="!!caption"
-        class="radiobox__caption"
-    >{{
-        caption
-    }}</h4>
+    <app-control-caption [caption]="caption"></app-control-caption>
 
     <div
         *ngFor="let item of items"

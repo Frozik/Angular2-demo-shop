@@ -1,10 +1,5 @@
 <div class="input input--theme-default input--size-default">
-    <h4
-        *ngIf="!!caption"
-        class="input__caption"
-    >{{
-        caption
-    }}</h4>
+    <app-control-caption [caption]="caption"></app-control-caption>
 
     <input
         type="text"

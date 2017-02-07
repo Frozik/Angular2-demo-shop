@@ -1,0 +1,24 @@
+@import "./../../styles/colors.scss";
+@import "./../../styles/box-model.scss";
+
+$transition: all .2s;
+
+.caption {
+    box-sizing: border-box;
+}
+
+    .caption--theme-default {
+        $caption-title-color: $controls-caption-color;
+
+        &.caption {
+            color: $caption-title-color;
+        }
+    }
+    
+    .caption--size-default {
+        $caption-text-padding: $padding-size;
+
+        &.caption {
+            margin: 0 0 $caption-text-padding 0;
+        }
+    }

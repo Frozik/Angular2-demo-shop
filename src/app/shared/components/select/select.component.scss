@@ -6,14 +6,9 @@
 }
 
     .select--theme-default {
-        $select-title-color: $controls-caption-color;
         $select-text-color: $controls-text-color;
         $select-light-color: $controls-light-primary-background-color;
         $select-dark-color: $controls-default-primary-background-color;
-
-        .select__caption {
-            color: $select-title-color;
-        }
 
         .select__control {
             border-color: $select-light-color;
@@ -32,10 +27,6 @@
         $select-text-padding: $padding-size;
 
         $select-height: $select-font-size + $select-border-size * 2;
-
-        .select__caption {
-            margin: 0 0 $select-text-padding 0;
-        }
 
         .select__control {
             padding:

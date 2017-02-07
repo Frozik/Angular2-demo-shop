@@ -1,3 +1,4 @@
+import { ControlCaptionComponent } from './components/control-caption/control-caption.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -32,6 +33,7 @@ import { ToFixedPipe } from './pipes/to-fixed.pipe';
         RangeComponent,
         InputComponent,
         ButtonComponent,
+        ControlCaptionComponent,
     ],
     providers: [NumberPipe],
     exports: [

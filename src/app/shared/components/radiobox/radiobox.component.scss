@@ -9,14 +9,9 @@ $transition: all .2s;
 }
 
     .radiobox--theme-default {
-        $radiobox-title-color: $controls-caption-color;
         $radiobox-text-color: $controls-text-color;
         $radiobox-light-color: $controls-light-primary-background-color;
         $radiobox-dark-color: $controls-default-primary-background-color;
-
-        .radiobox__caption {
-            color: $radiobox-title-color;
-        }
 
         .radiobox__item {
             &::before {
@@ -43,11 +38,6 @@ $transition: all .2s;
         $radiobox-font-size: 16px;
         $radiobox-border-size: 3px;
         $radiobox-text-padding: $padding-size;
-
-
-        .radiobox__caption {
-            margin: 0 0 $radiobox-text-padding 0;
-        }
 
         .radiobox__item {
             margin-left: $radiobox-text-padding;
