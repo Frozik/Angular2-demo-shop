@@ -113,6 +113,10 @@ $transition: all .25s ease-in;
             }
         }
 
+        .description {
+            margin: $padding-size 0 0;
+        }
+
         @at-root .product:hover .product-caption h4::after {
             width: 100%;
         }
