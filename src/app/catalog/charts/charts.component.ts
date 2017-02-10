@@ -1,12 +1,13 @@
 import { Location } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 import { select } from 'ng2-redux';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/filter';
 import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
 
 import { IAppState } from './../../app.store';
+import { ISubscriptionTracker } from './../../core/models';
+import { SubscriptionTrackerService } from './../../core/subscription-tracker.service';
 import { CatalogActions } from './../catalog.actions';
 import { ICategory } from './../models';
 
@@ -48,18 +49,22 @@ export class ChartsComponent implements OnInit, OnDestroy {
         },
     ];
 
-    private readonly subscriptions: Subscription[] = [];
+    private readonly subscriptionTracker: ISubscriptionTracker;
 
     constructor(
         private catalogActions: CatalogActions,
         public location: Location,
-    ) { }
+        subscriptionTrackerService: SubscriptionTrackerService,
+        viewContainerRef: ViewContainerRef,
+    ) {
+        this.subscriptionTracker = subscriptionTrackerService.buildTracker(viewContainerRef);
+    }
 
     ngOnInit() {
         this.catalogActions.fetchCategories();
         this.catalogActions.buildChartDataSets();
 
-        this.subscriptions.push(
+        this.subscriptionTracker.push(
             Observable.
                 combineLatest(
                     this.categories.filter((categories) => !!categories),
@@ -79,7 +84,7 @@ export class ChartsComponent implements OnInit, OnDestroy {
                 }),
         );
 
-        this.subscriptions.push(
+        this.subscriptionTracker.push(
             Observable.
                 combineLatest(
                     this.categories.filter((categories) => !!categories),
@@ -102,9 +107,5 @@ export class ChartsComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.catalogActions.clearChartDataSets();
-
-        for (const subscription of this.subscriptions) {
-            subscription.unsubscribe();
-        }
     }
 }

@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select } from 'ng2-redux';
 import 'rxjs/add/observable/combineLatest';
@@ -7,11 +7,12 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
 
 import { IAppState } from './../../app.store';
 import { AuthService } from './../../auth/auth.service';
 import { Role } from './../../auth/models';
+import { ISubscriptionTracker } from './../../core/models';
+import { SubscriptionTrackerService } from './../../core/subscription-tracker.service';
 import { CatalogActions } from './../catalog.actions';
 import { Gender, ICategory, IProduct } from './../models';
 
@@ -33,7 +34,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     public genderType: typeof Gender = Gender;
     public roles: typeof Role = Role;
 
-    private readonly subscriptions: Subscription[] = [];
+    private readonly subscriptionTracker: ISubscriptionTracker;
 
     constructor(
         private router: Router,
@@ -41,18 +42,22 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
         private catalogActions: CatalogActions,
         public authService: AuthService,
         public location: Location,
-    ) { }
+        subscriptionTrackerService: SubscriptionTrackerService,
+        viewContainerRef: ViewContainerRef,
+    ) {
+        this.subscriptionTracker = subscriptionTrackerService.buildTracker(viewContainerRef);
+    }
 
     ngOnInit() {
         this.catalogActions.fetchCategories();
 
-        this.subscriptions.push(
+        this.subscriptionTracker.push(
             this.activatedRoute.params.
                 subscribe((params: ProductDetailsParams) =>
                     this.catalogActions.fetchProduct(parseInt(params.id , 10))),
         );
 
-        this.subscriptions.push(
+        this.subscriptionTracker.push(
             Observable.
                 combineLatest(
                     this.categories,
@@ -64,7 +69,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
                 subscribe((loading) => this.loading = loading),
         );
 
-        this.subscriptions.push(
+        this.subscriptionTracker.push(
             Observable.
                 combineLatest(
                     this.categories.filter((categories) => categories !== null),
@@ -79,9 +84,5 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.catalogActions.clearSellState();
-
-        for (const subscription of this.subscriptions) {
-            subscription.unsubscribe();
-        }
     }
 }

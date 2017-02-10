@@ -4,17 +4,18 @@ import {
     EventEmitter,
     HostListener,
     Input,
-    OnDestroy,
     OnInit,
     Output,
     ViewChild,
+    ViewContainerRef,
 } from '@angular/core';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/sampleTime';
 import { Subject } from 'rxjs/Subject';
-import { Subscription } from 'rxjs/Subscription';
 
+import { ISubscriptionTracker } from './../../../core/models';
+import { SubscriptionTrackerService } from './../../../core/subscription-tracker.service';
 import { getElementOffset, isDeepEqual } from './../../../helpers';
 import { IRange } from './../../models';
 
@@ -28,7 +29,7 @@ enum TrackSlider {
     templateUrl: './range.component.html',
     styleUrls: ['./range.component.scss'],
 })
-export class RangeComponent implements OnInit, OnDestroy {
+export class RangeComponent implements OnInit {
     @Input() public caption: string;
     @Input() public min: number = 0;
     @Input() public max: number = 100;
@@ -49,7 +50,14 @@ export class RangeComponent implements OnInit, OnDestroy {
     private mousePosition: Subject<{ position: number, slider: TrackSlider }> =
         new Subject<{ position: number, slider: TrackSlider }>();
     private cachedElementOffset: { left: number, width: number } = null;
-    private readonly subscriptions: Subscription[] = [];
+    private readonly subscriptionTracker: ISubscriptionTracker;
+
+    public constructor(
+        subscriptionTrackerService: SubscriptionTrackerService,
+        viewContainerRef: ViewContainerRef,
+    ) {
+        this.subscriptionTracker = subscriptionTrackerService.buildTracker(viewContainerRef);
+    }
 
     public ngOnInit() {
         this.fixInputValues();
@@ -61,7 +69,7 @@ export class RangeComponent implements OnInit, OnDestroy {
 
         const delta = 1 / (range / this.step);
 
-        this.subscriptions.push(
+        this.subscriptionTracker.push(
             this.mousePosition.
                 sampleTime(200).
                 map(({ position, slider }) => ({
@@ -82,12 +90,6 @@ export class RangeComponent implements OnInit, OnDestroy {
                     });
                 }),
         );
-    }
-
-    public ngOnDestroy() {
-        for (const subscription of this.subscriptions) {
-            subscription.unsubscribe();
-        }
     }
 
     @HostListener('window:mousemove', ['$event'])

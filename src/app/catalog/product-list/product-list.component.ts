@@ -3,9 +3,9 @@ import {
     Component,
     ElementRef,
     HostListener,
-    OnDestroy,
     OnInit,
     ViewChild,
+    ViewContainerRef,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgRedux, select } from 'ng2-redux';
@@ -16,10 +16,11 @@ import 'rxjs/add/operator/skipWhile';
 import 'rxjs/add/operator/startWith';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import { Subscription } from 'rxjs/Subscription';
 
 import { IAppState } from './../../app.store';
 import { AuthService } from './../../auth/auth.service';
+import { ISubscriptionTracker } from './../../core/models';
+import { SubscriptionTrackerService } from './../../core/subscription-tracker.service';
 import { getElementOffset } from './../../helpers';
 import { CatalogActions } from './../catalog.actions';
 import { ICategory, IProduct } from './../models';
@@ -29,7 +30,7 @@ import { ICategory, IProduct } from './../models';
     templateUrl: './product-list.component.html',
     styleUrls: ['./product-list.component.scss'],
 })
-export class ProductListComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ProductListComponent implements OnInit, AfterViewInit {
     @ViewChild('endOfListMarker') private endOfListMarker: ElementRef;
 
     @select((state: IAppState) => state.catalog.persistent.categories)
@@ -43,21 +44,25 @@ export class ProductListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     public windowScrolledSubject: Subject<Event> = new Subject<Event>();
 
-    private readonly subscriptions: Subscription[] = [];
+    private readonly subscriptionTracker: ISubscriptionTracker;
 
     public constructor(
         private router: Router,
         private ngRedux: NgRedux<IAppState>,
         private catalogActions: CatalogActions,
         private authService: AuthService,
-    ) { }
+        subscriptionTrackerService: SubscriptionTrackerService,
+        viewContainerRef: ViewContainerRef,
+    ) {
+        this.subscriptionTracker = subscriptionTrackerService.buildTracker(viewContainerRef);
+    }
 
     public ngOnInit() {
         this.catalogActions.fetchCategories();
     }
 
     public ngAfterViewInit() {
-        this.subscriptions.push(
+        this.subscriptionTracker.push(
             Observable.
                 combineLatest(
                     this.categories,
@@ -83,12 +88,6 @@ export class ProductListComponent implements OnInit, AfterViewInit, OnDestroy {
                 debounceTime(500).
                 subscribe(this.checkShouldLoadNextPage.bind(this)),
             );
-    }
-
-    public ngOnDestroy() {
-        for (const subscription of this.subscriptions) {
-            subscription.unsubscribe();
-        }
     }
 
     @HostListener('window:scroll', ['$event'])

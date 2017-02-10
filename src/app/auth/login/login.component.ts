@@ -1,8 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Subscription } from 'rxjs/Subscription';
 
 import { AppActions } from './../../app.actions';
+import { ISubscriptionTracker } from './../../core/models';
+import { SubscriptionTrackerService } from './../../core/subscription-tracker.service';
 import { AuthService } from './../auth.service';
 
 @Component({
@@ -10,17 +11,21 @@ import { AuthService } from './../auth.service';
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
     public form: FormGroup;
     public incorrectLogin: boolean = false;
 
-    private readonly subscriptions: Subscription[] = [];
+    private readonly subscriptionTracker: ISubscriptionTracker;
 
     constructor(
         private authService: AuthService,
         private formBuilder: FormBuilder,
         private appActions: AppActions,
-    ) { }
+        subscriptionTrackerService: SubscriptionTrackerService,
+        viewContainerRef: ViewContainerRef,
+    ) {
+        this.subscriptionTracker = subscriptionTrackerService.buildTracker(viewContainerRef);
+    }
 
     ngOnInit() {
         this.form = this.formBuilder.group({
@@ -28,15 +33,9 @@ export class LoginComponent implements OnInit, OnDestroy {
             password: [''],
         });
 
-        this.subscriptions.push(
+        this.subscriptionTracker.push(
             this.form.valueChanges.subscribe(() => this.incorrectLogin = false),
         );
-    }
-
-    public ngOnDestroy() {
-        for (const subscription of this.subscriptions) {
-            subscription.unsubscribe();
-        }
     }
 
     login(username: string, password: string) {
