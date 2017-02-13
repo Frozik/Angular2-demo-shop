@@ -19,7 +19,7 @@ $transition: left .2s ease-in-out;
         transition: $transition;
 
         .navigation-bar {
-            padding: $padding-size 0;
+            padding: 0 $padding-size;
 
             width: 100%;
 
@@ -29,7 +29,7 @@ $transition: left .2s ease-in-out;
             .action {
                 display: block;
                 float: left;
-                margin-left: $double-padding-size;
+                margin: $padding-size;
 
                 height: $action-height;
 
@@ -60,7 +60,7 @@ $transition: left .2s ease-in-out;
                 background-position: left $padding-size center;
                 background-size: $action-icon-size $action-icon-size;
 
-                &.add-category {
+                &.add-category, &.add-product {
                     background-image: url(
                         "data:image/svg+xml;base64,CjxzdmcgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDEwMDAgMTAwMCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMTAwMCAxMDAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPG1ldGFkYXRhPiBTdmcgVmVjdG9yIEljb25zIDogaHR0cDovL3d3dy5vbmxpbmV3ZWJmb250cy5jb20vaWNvbiA8L21ldGFkYXRhPgogIDxnPjxnPjxwYXRoIGQ9Ik05OTAsNTY5LjFINTY5LjFWOTkwSDQzMC45VjU2OS4xSDEwVjQzMC45aDQyMC45VjEwaDEzOC4xdjQyMC45SDk5MFY1NjkuMXoiIHN0eWxlPSJmaWxsOiNGRkZGRkYiPjwvcGF0aD48L2c+PC9nPjwvc3ZnPgogIA=="
                     );
@@ -137,6 +137,74 @@ $transition: left .2s ease-in-out;
                 width: 140px;
 
                 vertical-align: top;
+            }
+        }        
+    }
+
+    .edit-form {
+        display: table;
+        
+        width: 100%;
+        min-height: 315px;
+
+        > div {
+            display: table-row;
+        }
+
+        .fields {
+            display: table-cell;
+            margin: 0;
+            padding: 0;
+
+            width: 100%;
+
+            border: none;
+
+            .input {
+                margin: $padding-size 0;
+
+                &.rating select {
+                    width: 100px;
+                }
+            }
+
+            input, textarea {
+                width: calc(100% - 95px);
+
+                box-sizing: border-box;
+            }
+
+            textarea {
+                height: 7em;
+
+                resize: none;
+            }
+
+            label {
+                display: inline-block;
+
+                width: 90px;
+
+                vertical-align: top;
+            }
+        }
+
+        .image-preview {
+            display: table-cell;
+            padding-left: $padding-size;
+
+            width: 300px;
+            
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: top;
+            line-height: 0;
+
+            img {
+                display: inline-block;
+                
+                max-width: 300px;
+                max-height: 370px;
             }
         }
     }

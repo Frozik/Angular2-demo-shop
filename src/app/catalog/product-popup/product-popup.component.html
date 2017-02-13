@@ -1,0 +1,116 @@
+<app-popup
+    [caption]="caption"
+    [formGroup]="form"
+    (cancelPressed)="cancelPressed.emit()"
+    (okPressed)="buildProductFromFormValues(form.value)"
+>
+    <div class="edit-form">
+        <div>
+            <fieldset class="fields">
+                <div class="input image">
+                    <label for="image">Image:</label>
+                    <input
+                        required
+                        appUrlExists
+                        appNoLTWhitespace
+                        #imageUrlInput
+                        type="text"
+                        id="image"
+                        formControlName="imageUrl"
+                    >
+                </div>
+                <div class="input name">
+                    <label for="name">Name:</label>
+                    <input
+                        required
+                        minlength="5"
+                        maxlength="50"
+                        appNoLTWhitespace
+                        type="text"
+                        id="name"
+                        formControlName="name"
+                    >
+                </div>
+                <div class="input category">
+                    <label for="category-name">Category:</label>
+                    <select
+                        required
+                        formControlName="category"
+                    >
+                        <option
+                            *ngFor="let category of categories | async"
+                            [value]="category.id"
+                        >
+                            {{category.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="input gender">
+                    <label for="gender-name">Gender:</label>
+                    <select
+                        required
+                        formControlName="gender"
+                    >
+                        <option [value]="genderType.Man"
+                        >
+                            {{genderType.Man | gender}}
+                        </option>
+                        <option [value]="genderType.Woman"
+                        >
+                            {{genderType.Woman | gender}}
+                        </option>
+                        <option [value]="genderType.Unisex"
+                        >
+                            {{genderType.Unisex | gender}}
+                        </option>
+                    </select>
+                </div>
+                <div class="input description">
+                    <label for="description">Description:</label>
+                    <textarea
+                        required
+                        appNoLTWhitespace
+                        minlength="5"
+                        maxlength="500"
+                        type="text"
+                        id="description"
+                        formControlName="description"
+                    ></textarea>
+                </div>
+                <div class="input cost">
+                    <label for="cost">Price:</label>
+                    <input
+                        required
+                        appPrice
+                        type="number"
+                        id="cost"
+                        formControlName="cost"
+                    >
+                </div>
+                <div class="input rating">
+                    <label for="rating">Rating:</label>
+                    <select
+                        required
+                        [appNumberRange]="{ minValue: 0, maxValue: 5 }"
+                        formControlName="rating"
+                    >
+                        <option
+                            *ngFor="let number of [0, 1, 2, 3, 4, 5]"
+                            [value]="number"
+                            [selected]="number === rating"
+                        >
+                            {{number}}
+                        </option>
+                    </select>
+                </div>
+            </fieldset>
+            <div class="image-preview">
+                <h3>Image preview</h3>
+                <img
+                    *ngIf="form.controls.imageUrl.valid"
+                    [src]="imageUrlInput.value"
+                >
+            </div>
+        </div>
+    </div>
+</app-popup>

@@ -438,25 +438,14 @@ export function sellProduct(productId: number): Observable<boolean> {
     return Observable.of(true).delay(2000);
 }
 
-export function addProducts(productId: number, count: number) {
+export function addProductsToWarehouse(productId: number, count: number) {
     const product = getStorageProducts().find((innerProduct) => innerProduct.id === productId);
 
     setStorageProduct(Object.assign({ }, product, { count: product.count + count }));
 }
 
-export function updateProductDetails(
-    productId: number,
-    updateData: {
-        image?: string,
-        name?: string,
-        description?: string,
-        cost?: number,
-        rating?: number,
-    },
-) {
-    const product = getStorageProducts().find((innerProduct) => innerProduct.id === productId);
-
-    setStorageProduct(Object.assign({ }, product, updateData));
+export function updateProductDetails(product: IProduct) {
+    setStorageProduct(Object.assign({ }, product));
 }
 
 export function deleteProduct(productId: number) {
@@ -486,7 +475,6 @@ export function getSoldByCategory(): Observable<Array<{ count: number, categoryI
     return Observable.of(result).delay(3000);
 }
 
-
 export function getSoldPriceByCategory(): Observable<Array<{ sold: number, categoryId: number }>> {
     const result = getStorageProducts().reduce(
         (
@@ -507,4 +495,25 @@ export function getSoldPriceByCategory(): Observable<Array<{ sold: number, categ
     );
 
     return Observable.of(result).delay(1000);
+}
+
+export function addProduct(product: IProduct): Observable<boolean> {
+    if (!product || Number.isInteger(product.id)) {
+        return Observable.of(false);
+    }
+
+    const products = getStorageProducts();
+    const comparableName = product.name.toUpperCase();
+
+    const result = !products.some((innerProduct) => innerProduct.name.toUpperCase() === comparableName);
+
+    if (result) {
+        setStorageProduct(Object.assign(
+            { },
+            product,
+            { id: Math.max(...products.map((innerProduct) => innerProduct.id)) + 1 },
+        ));
+    }
+
+    return Observable.of(result).delay(2000);
 }

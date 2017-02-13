@@ -21,6 +21,7 @@
             <div class="modal__content__footer__block">
                 <app-button
                     (pressed)="okPressed.emit($event)"
+                    [disabled]="disabledOkButton"
                     caption="Ok"
                 ></app-button>
                 <app-button

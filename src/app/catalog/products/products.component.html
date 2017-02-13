@@ -7,7 +7,7 @@
             <a class="action show-filter" (click)="sidebarShown = true"></a>
 
             <a
-                *ngIf="authService.credentials.role === roles.administrator && (categories | async)"
+                *ngIf="showAdminControls"
                 class="action button-texted add-category"
                 (click)="popup = popupType.AddCategory"
             >
@@ -15,11 +15,19 @@
             </a>
 
             <a
-                *ngIf="authService.credentials.role === roles.administrator && (categories | async)"
+                *ngIf="showAdminControls"
                 class="action button-texted delete-category"
                 (click)="popup = popupType.DeleteCategory"
             >
                 category
+            </a>
+
+            <a
+                *ngIf="showAdminControls"
+                class="action button-texted add-product"
+                (click)="popup = popupType.AddProduct"
+            >
+                product
             </a>
         </nav>
 
@@ -69,3 +77,9 @@
         </div>
     </fieldset>
 </app-popup>
+
+<app-product-popup
+    *ngIf="popup === popupType.AddProduct"
+    (cancelPressed)="popup = popupType.None"
+    (okPressed)="addProduct($event); popup = popupType.None;"
+></app-product-popup>

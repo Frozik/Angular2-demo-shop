@@ -14,6 +14,7 @@ import { GenderPipe } from './pipes/gender.pipe';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductFilterComponent } from './product-filter/product-filter.component';
 import { ProductListComponent } from './product-list/product-list.component';
+import { ProductPopupComponent } from './product-popup/product-popup.component';
 import { ProductComponent } from './product/product.component';
 import { ProductsComponent } from './products/products.component';
 
@@ -36,6 +37,7 @@ import { ProductsComponent } from './products/products.component';
         GenderPipe,
         LandingComponent,
         ChartsComponent,
+        ProductPopupComponent,
     ],
     providers: [
         CatalogActions,
