@@ -11,7 +11,8 @@ import {
     fetchCategories,
 } from './data/categories.data';
 import {
-    addProducts,
+    addProduct,
+    addProductsToWarehouse,
     deleteProduct,
     fetchProduct,
     fetchProducts,
@@ -173,27 +174,18 @@ export class CatalogActions {
         });
     }
 
-    public addProductCount(productId: number, count: number) {
-        addProducts(productId, count);
+    public addProductsToWarehouse(productId: number, count: number) {
+        addProductsToWarehouse(productId, count);
 
         this.clearProducts();
         this.fetchProduct(productId);
     }
 
-    public updateProductDetails(
-        productId: number,
-        updateData: {
-            image?: string,
-            name?: string,
-            description?: string,
-            cost?: number,
-            rating?: number,
-        },
-    ) {
-        updateProductDetails(productId, updateData);
+    public updateProductDetails(product: IProduct) {
+        updateProductDetails(product);
 
         this.clearProducts();
-        this.fetchProduct(productId);
+        this.fetchProduct(product.id);
     }
 
     public deleteProduct(productId: number) {
@@ -267,6 +259,18 @@ export class CatalogActions {
             this.resetCategories();
 
             this.fetchCategories();
+        });
+    }
+
+    public addProduct(product: IProduct) {
+        addProduct(product).subscribe((result) => {
+            if (!result) {
+                return;
+            }
+
+            this.clearProducts();
+
+            this.fetchNextProductsPage();
         });
     }
 }

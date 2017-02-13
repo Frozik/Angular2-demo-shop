@@ -1,10 +1,10 @@
-import { ControlCaptionComponent } from './components/control-caption/control-caption.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
+import { ControlCaptionComponent } from './components/control-caption/control-caption.component';
 import { InputComponent } from './components/input/input.component';
 import { PopupComponent } from './components/popup/popup.component';
 import { ProgressComponent } from './components/progress/progress.component';
@@ -14,6 +14,10 @@ import { SelectComponent } from './components/select/select.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { NumberPipe } from './pipes/number.pipe';
 import { ToFixedPipe } from './pipes/to-fixed.pipe';
+import { NoLeadingTrailingWhitespaceValidatorDirective } from './validators/no-lt-whitespace.directive';
+import { NumberRangeValidatorDirective } from './validators/number-range.directive';
+import { PriceValidatorDirective } from './validators/price.directive';
+import { UrlExistsValidatorDirective } from './validators/url-exists.directive';
 
 @NgModule({
     imports: [
@@ -34,6 +38,10 @@ import { ToFixedPipe } from './pipes/to-fixed.pipe';
         InputComponent,
         ButtonComponent,
         ControlCaptionComponent,
+        NumberRangeValidatorDirective,
+        UrlExistsValidatorDirective,
+        PriceValidatorDirective,
+        NoLeadingTrailingWhitespaceValidatorDirective,
     ],
     providers: [NumberPipe],
     exports: [
@@ -51,6 +59,10 @@ import { ToFixedPipe } from './pipes/to-fixed.pipe';
         RangeComponent,
         InputComponent,
         ButtonComponent,
+        NumberRangeValidatorDirective,
+        UrlExistsValidatorDirective,
+        PriceValidatorDirective,
+        NoLeadingTrailingWhitespaceValidatorDirective,
     ],
 })
 export class SharedModule { }

@@ -1,0 +1,94 @@
+@import "./../../shared/styles/box-model.scss";
+@import "./../../shared/styles/colors.scss";
+
+.edit-form {
+    display: table;
+    
+    width: 100%;
+    min-height: 315px;
+
+    > div {
+        display: table-row;
+    }
+
+    .fields {
+        display: table-cell;
+        margin: 0;
+        padding: 0;
+
+        width: 100%;
+
+        border: none;
+
+        .input {
+            margin: $padding-size 0;
+        }
+
+        input, textarea, select {
+            box-sizing: border-box;
+
+            width: calc(100% - 95px);
+
+            border: $block-border-size solid transparent;
+            outline: none;
+        }
+
+        textarea {
+            height: 7em;
+
+            resize: none;
+        }
+
+        label {
+            display: inline-block;
+
+            width: 90px;
+
+            vertical-align: top;
+        }
+
+        .ng-untouched.ng-invalid:not(:focus) {
+            border-bottom: $block-border-size solid red;
+        }
+
+        .ng-touched.ng-invalid {
+            border: $block-border-size solid red;
+
+            &:not(:focus) {
+                position: relative;
+                animation: wrong-log 0.3s;
+
+                @keyframes wrong-log {
+                    0%, 100% {
+                        left: 0px;
+                    }
+                    20% , 60% {
+                        left: 15px;
+                    }
+                    40% , 80% {
+                        left: -15px;
+                    }
+                }
+            }
+        }
+    }
+
+    .image-preview {
+        display: table-cell;
+        padding-left: $padding-size;
+
+        width: 300px;
+        
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: top;
+        line-height: 0;
+
+        img {
+            display: inline-block;
+            
+            max-width: 300px;
+            max-height: 370px;
+        }
+    }
+}

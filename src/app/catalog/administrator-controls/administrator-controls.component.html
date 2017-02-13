@@ -1,59 +1,21 @@
 <div class="controls-block">
     <span class="action-text">
-        You can <a class="action-link" (click)="addProducts()">add 5 more</a>.
+        You can <a class="action-link" (click)="addProductsToWarehouse()">add 5 more</a>.
     </span>
     <span class="action-text">
         Also you can
-        <a class="action-link" (click)="editProduct()">edit details</a>
+        <a class="action-link" (click)="editing = true">edit details</a>
         or
         <a class="action-link" (click)="deleting = true">delete it</a>.
     </span>
 </div>
 
-<app-popup
+<app-product-popup
     *ngIf="editing"
-    caption="Edit &quot;{{product.name}}&quot;"
+    [editProduct]="product"
     (cancelPressed)="editing = false"
-    (okPressed)="updateProductDetails()"
->
-    <div class="edit-form">
-        <div>
-            <fieldset class="fields">
-                <div class="input image">
-                    <label for="image">Image:</label>
-                    <input type="text" id="image" [(ngModel)]="editingProduct.image">
-                </div>
-                <div class="input name">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" [(ngModel)]="editingProduct.name">
-                </div>
-                <div class="input description">
-                    <label for="description">Description:</label>
-                    <textarea type="text" id="description" [(ngModel)]="editingProduct.description"></textarea>
-                </div>
-                <div class="input cost">
-                    <label for="cost">Price:</label>
-                    <input type="number" id="cost" [(ngModel)]="editingProduct.cost">
-                </div>
-                <div class="input rating">
-                    <label for="rating">Rating:</label>
-                    <select [(ngModel)]="editingProduct.rating">
-                        <option
-                            *ngFor="let number of [1,2,3,4,5]"
-                            [value]="number"
-                        >
-                            {{number}}
-                        </option>
-                    </select>
-                </div>
-            </fieldset>
-            <div class="image-preview">
-                <h3>Image preview</h3>
-                <img [src]="editingProduct.image">
-            </div>
-        </div>
-    </div>
-</app-popup>
+    (okPressed)="updateProductDetails($event); editing = false;"
+></app-product-popup>
 
 <app-popup
     *ngIf="deleting"

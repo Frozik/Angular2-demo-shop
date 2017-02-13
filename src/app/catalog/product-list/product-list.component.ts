@@ -1,5 +1,4 @@
 import {
-    AfterViewInit,
     Component,
     ElementRef,
     HostListener,
@@ -30,7 +29,7 @@ import { ICategory, IProduct } from './../models';
     templateUrl: './product-list.component.html',
     styleUrls: ['./product-list.component.scss'],
 })
-export class ProductListComponent implements OnInit, AfterViewInit {
+export class ProductListComponent implements OnInit {
     @ViewChild('endOfListMarker') private endOfListMarker: ElementRef;
 
     @select((state: IAppState) => state.catalog.persistent.categories)
@@ -59,9 +58,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
 
     public ngOnInit() {
         this.catalogActions.fetchCategories();
-    }
 
-    public ngAfterViewInit() {
         this.subscriptionTracker.push(
             Observable.
                 combineLatest(

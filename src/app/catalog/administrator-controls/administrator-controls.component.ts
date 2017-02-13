@@ -16,13 +16,6 @@ export class AdministratorControlsComponent {
 
     public editing: boolean = false;
     public deleting: boolean = false;
-    public editingProduct: {
-        image: string,
-        name: string,
-        description: string,
-        cost: number,
-        rating: string,
-    } = null;
 
     public constructor(
         private ngRedux: NgRedux<IAppState>,
@@ -30,31 +23,12 @@ export class AdministratorControlsComponent {
         private location: Location,
     ) { }
 
-    public addProducts() {
-        this.catalogActions.addProductCount(this.product.id, 5);
+    public addProductsToWarehouse() {
+        this.catalogActions.addProductsToWarehouse(this.product.id, 5);
     }
 
-    public editProduct() {
-        this.editing = true;
-
-        const { image, name, description, cost, rating } = this.product;
-
-        this.editingProduct = { image, name, description, cost, rating: rating.toString() };
-    }
-
-    public updateProductDetails() {
-        const { image, name, description, cost, rating } = this.editingProduct;
-
-        this.catalogActions.updateProductDetails(
-            this.product.id,
-            {
-                image,
-                name,
-                description,
-                cost: cost || 0,
-                rating: parseInt(rating, 10),
-            },
-        );
+    public updateProductDetails(product: IProduct) {
+        this.catalogActions.updateProductDetails(product);
     }
 
     public deleteProduct() {
