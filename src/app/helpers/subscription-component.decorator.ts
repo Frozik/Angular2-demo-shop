@@ -14,6 +14,10 @@ const hookObject: OnDestroy = {
 };
 
 export function trackSubscription(subscription: Subscription) {
+    if (!subscription) {
+        return;
+    }
+
     if (!this) {
         throw new Error(`Method "${trackSubscription.name}" should be bound to the component`);
     }
