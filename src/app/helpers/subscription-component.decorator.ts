@@ -40,7 +40,7 @@ export function SubscriptionComponent(): ClassDecorator {
             const targetPrototype = target.prototype;
 
             const methodDescriptor = Reflect.getOwnPropertyDescriptor(targetPrototype, methodName);
-            if (!!methodDescriptor) {
+            if (methodDescriptor) {
                 const { configurable } = methodDescriptor;
 
                 if (!configurable) {
