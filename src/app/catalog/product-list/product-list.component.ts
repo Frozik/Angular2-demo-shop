@@ -1,11 +1,4 @@
-import {
-    Component,
-    ElementRef,
-    HostListener,
-    OnInit,
-    ViewChild,
-    ViewContainerRef,
-} from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgRedux, select } from 'ng2-redux';
 import 'rxjs/add/observable/combineLatest';
@@ -18,9 +11,8 @@ import { Subject } from 'rxjs/Subject';
 
 import { IAppState } from './../../app.store';
 import { AuthService } from './../../auth/auth.service';
-import { ISubscriptionTracker } from './../../core/models';
-import { SubscriptionTrackerService } from './../../core/subscription-tracker.service';
 import { getElementOffset } from './../../helpers';
+import { SubscriptionComponent, trackSubscription } from './../../helpers/subscription-component.decorator';
 import { CatalogActions } from './../catalog.actions';
 import { ICategory, IProduct } from './../models';
 
@@ -29,6 +21,7 @@ import { ICategory, IProduct } from './../models';
     templateUrl: './product-list.component.html',
     styleUrls: ['./product-list.component.scss'],
 })
+@SubscriptionComponent()
 export class ProductListComponent implements OnInit {
     @ViewChild('endOfListMarker') private endOfListMarker: ElementRef;
 
@@ -43,23 +36,19 @@ export class ProductListComponent implements OnInit {
 
     public windowScrolledSubject: Subject<Event> = new Subject<Event>();
 
-    private readonly subscriptionTracker: ISubscriptionTracker;
+    private readonly trackSubscription = trackSubscription.bind(this);
 
     public constructor(
         private router: Router,
         private ngRedux: NgRedux<IAppState>,
         private catalogActions: CatalogActions,
         private authService: AuthService,
-        subscriptionTrackerService: SubscriptionTrackerService,
-        viewContainerRef: ViewContainerRef,
-    ) {
-        this.subscriptionTracker = subscriptionTrackerService.buildTracker(viewContainerRef);
-    }
+    ) { }
 
     public ngOnInit() {
         this.catalogActions.fetchCategories();
 
-        this.subscriptionTracker.push(
+        this.trackSubscription(
             Observable.
                 combineLatest(
                     this.categories,

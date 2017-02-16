@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select } from 'ng2-redux';
 import 'rxjs/add/observable/combineLatest';
@@ -11,8 +11,7 @@ import { Observable } from 'rxjs/Observable';
 import { IAppState } from './../../app.store';
 import { AuthService } from './../../auth/auth.service';
 import { Role } from './../../auth/models';
-import { ISubscriptionTracker } from './../../core/models';
-import { SubscriptionTrackerService } from './../../core/subscription-tracker.service';
+import { SubscriptionComponent, trackSubscription } from './../../helpers/subscription-component.decorator';
 import { CatalogActions } from './../catalog.actions';
 import { Gender, ICategory, IProduct } from './../models';
 
@@ -23,6 +22,7 @@ import { ProductDetailsParams } from './../catalog-routing.module';
     templateUrl: './product-details.component.html',
     styleUrls: ['./product-details.component.scss'],
 })
+@SubscriptionComponent()
 export class ProductDetailsComponent implements OnInit, OnDestroy {
     @select((state: IAppState) => state.catalog.persistent.categories)
     public categories: Observable<ICategory[]>;
@@ -34,7 +34,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     public genderType: typeof Gender = Gender;
     public roles: typeof Role = Role;
 
-    private readonly subscriptionTracker: ISubscriptionTracker;
+    private readonly trackSubscription = trackSubscription.bind(this);
 
     constructor(
         private router: Router,
@@ -42,22 +42,18 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
         private catalogActions: CatalogActions,
         public authService: AuthService,
         public location: Location,
-        subscriptionTrackerService: SubscriptionTrackerService,
-        viewContainerRef: ViewContainerRef,
-    ) {
-        this.subscriptionTracker = subscriptionTrackerService.buildTracker(viewContainerRef);
-    }
+    ) { }
 
     ngOnInit() {
         this.catalogActions.fetchCategories();
 
-        this.subscriptionTracker.push(
+        this.trackSubscription(
             this.activatedRoute.params.
                 subscribe((params: ProductDetailsParams) =>
                     this.catalogActions.fetchProduct(parseInt(params.id , 10))),
         );
 
-        this.subscriptionTracker.push(
+        this.trackSubscription(
             Observable.
                 combineLatest(
                     this.categories,
@@ -69,7 +65,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
                 subscribe((loading) => this.loading = loading),
         );
 
-        this.subscriptionTracker.push(
+        this.trackSubscription(
             Observable.
                 combineLatest(
                     this.categories.filter((categories) => categories !== null),

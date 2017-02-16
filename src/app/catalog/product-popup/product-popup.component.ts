@@ -1,11 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewContainerRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { select } from 'ng2-redux';
 import { Observable } from 'rxjs/Observable';
 
 import { IAppState } from './../../app.store';
-import { ISubscriptionTracker } from './../../core/models';
-import { SubscriptionTrackerService } from './../../core/subscription-tracker.service';
+import { SubscriptionComponent, trackSubscription } from './../../helpers/subscription-component.decorator';
 import { Gender, ICategory, IProduct } from './../models';
 
 @Component({
@@ -13,6 +12,7 @@ import { Gender, ICategory, IProduct } from './../models';
     templateUrl: './product-popup.component.html',
     styleUrls: ['./product-popup.component.scss'],
 })
+@SubscriptionComponent()
 export class ProductPopupComponent implements OnInit {
     @select((state: IAppState) => state.catalog.persistent.categories)
     public categories: Observable<ICategory[]>;
@@ -26,15 +26,9 @@ export class ProductPopupComponent implements OnInit {
     public genderType: typeof Gender = Gender;
     public form: FormGroup;
 
-    private readonly subscriptionTracker: ISubscriptionTracker;
+    private readonly trackSubscription = trackSubscription.bind(this);
 
-    constructor(
-        private formBuilder: FormBuilder,
-        subscriptionTrackerService: SubscriptionTrackerService,
-        viewContainerRef: ViewContainerRef,
-    ) {
-        this.subscriptionTracker = subscriptionTrackerService.buildTracker(viewContainerRef);
-    }
+    constructor(private formBuilder: FormBuilder) { }
 
     public ngOnInit() {
         this.caption = !this.editProduct
@@ -61,7 +55,7 @@ export class ProductPopupComponent implements OnInit {
             rating: [rating.toString()],
         });
 
-        this.subscriptionTracker.push(
+        this.trackSubscription(
             this.categories.subscribe((categories) => {
                 this.form.controls['category'].setValue(categories && categories.length
                     ? (

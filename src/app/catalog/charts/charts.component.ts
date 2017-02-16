@@ -1,13 +1,12 @@
 import { Location } from '@angular/common';
-import { Component, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select } from 'ng2-redux';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/filter';
 import { Observable } from 'rxjs/Observable';
 
 import { IAppState } from './../../app.store';
-import { ISubscriptionTracker } from './../../core/models';
-import { SubscriptionTrackerService } from './../../core/subscription-tracker.service';
+import { SubscriptionComponent, trackSubscription } from './../../helpers/subscription-component.decorator';
 import { CatalogActions } from './../catalog.actions';
 import { ICategory } from './../models';
 
@@ -16,6 +15,7 @@ import { ICategory } from './../models';
     templateUrl: './charts.component.html',
     styleUrls: ['./charts.component.scss'],
 })
+@SubscriptionComponent()
 export class ChartsComponent implements OnInit, OnDestroy {
     @select((state: IAppState) => state.catalog.persistent.categories)
     public categories: Observable<ICategory[]>;
@@ -49,22 +49,18 @@ export class ChartsComponent implements OnInit, OnDestroy {
         },
     ];
 
-    private readonly subscriptionTracker: ISubscriptionTracker;
+    private readonly trackSubscription = trackSubscription.bind(this);
 
     constructor(
         private catalogActions: CatalogActions,
         public location: Location,
-        subscriptionTrackerService: SubscriptionTrackerService,
-        viewContainerRef: ViewContainerRef,
-    ) {
-        this.subscriptionTracker = subscriptionTrackerService.buildTracker(viewContainerRef);
-    }
+    ) { }
 
     ngOnInit() {
         this.catalogActions.fetchCategories();
         this.catalogActions.buildChartDataSets();
 
-        this.subscriptionTracker.push(
+        this.trackSubscription(
             Observable.
                 combineLatest(
                     this.categories.filter((categories) => !!categories),

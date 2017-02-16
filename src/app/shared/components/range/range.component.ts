@@ -7,16 +7,14 @@ import {
     OnInit,
     Output,
     ViewChild,
-    ViewContainerRef,
 } from '@angular/core';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/sampleTime';
 import { Subject } from 'rxjs/Subject';
 
-import { ISubscriptionTracker } from './../../../core/models';
-import { SubscriptionTrackerService } from './../../../core/subscription-tracker.service';
 import { getElementOffset, isDeepEqual } from './../../../helpers';
+import { SubscriptionComponent, trackSubscription } from './../../../helpers/subscription-component.decorator';
 import { IRange } from './../../models';
 
 enum TrackSlider {
@@ -29,6 +27,7 @@ enum TrackSlider {
     templateUrl: './range.component.html',
     styleUrls: ['./range.component.scss'],
 })
+@SubscriptionComponent()
 export class RangeComponent implements OnInit {
     @Input() public caption: string;
     @Input() public min: number = 0;
@@ -50,14 +49,7 @@ export class RangeComponent implements OnInit {
     private mousePosition: Subject<{ position: number, slider: TrackSlider }> =
         new Subject<{ position: number, slider: TrackSlider }>();
     private cachedElementOffset: { left: number, width: number } = null;
-    private readonly subscriptionTracker: ISubscriptionTracker;
-
-    public constructor(
-        subscriptionTrackerService: SubscriptionTrackerService,
-        viewContainerRef: ViewContainerRef,
-    ) {
-        this.subscriptionTracker = subscriptionTrackerService.buildTracker(viewContainerRef);
-    }
+    private trackSubscription = trackSubscription.bind(this);
 
     public ngOnInit() {
         this.fixInputValues();
@@ -69,7 +61,7 @@ export class RangeComponent implements OnInit {
 
         const delta = 1 / (range / this.step);
 
-        this.subscriptionTracker.push(
+        this.trackSubscription(
             this.mousePosition.
                 sampleTime(200).
                 map(({ position, slider }) => ({

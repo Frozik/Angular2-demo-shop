@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { select } from 'ng2-redux';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/debounceTime';
@@ -12,9 +12,8 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 import { IAppState } from './../../app.store';
-import { ISubscriptionTracker } from './../../core/models';
-import { SubscriptionTrackerService } from './../../core/subscription-tracker.service';
 import { isDeepEqual } from './../../helpers';
+import { SubscriptionComponent, trackSubscription } from './../../helpers/subscription-component.decorator';
 import { IRange } from './../../shared/models';
 import { NumberPipe } from './../../shared/pipes/number.pipe';
 import { CatalogActions } from './../catalog.actions';
@@ -26,6 +25,7 @@ import { GenderPipe } from './../pipes/gender.pipe';
     templateUrl: './product-filter.component.html',
     styleUrls: ['./product-filter.component.scss'],
 })
+@SubscriptionComponent()
 export class ProductFilterComponent implements OnInit {
     @select((state: IAppState) => state.catalog.persistent.categories)
     public categories: Observable<ICategory[]>;
@@ -42,17 +42,13 @@ export class ProductFilterComponent implements OnInit {
     public genderItems: Array<{ display: string, value: Gender }>;
     public loading: boolean = true;
 
-    private readonly subscriptionTracker: ISubscriptionTracker;
+    private readonly trackSubscription = trackSubscription.bind(this);
 
     public constructor(
         private catalogActions: CatalogActions,
         private numberPipe: NumberPipe,
         private genderPipe: GenderPipe,
-        subscriptionTrackerService: SubscriptionTrackerService,
-        viewContainerRef: ViewContainerRef,
     ) {
-        this.subscriptionTracker = subscriptionTrackerService.buildTracker(viewContainerRef);
-
         this.genderItems = [
             { display: this.genderPipe.transform(Gender.Man), value: Gender.Man },
             { display: this.genderPipe.transform(Gender.Woman), value: Gender.Woman },
@@ -64,14 +60,14 @@ export class ProductFilterComponent implements OnInit {
     public ngOnInit() {
         this.catalogActions.fetchCategories();
 
-        this.subscriptionTracker.push(
+        this.trackSubscription(
             this.categories.
                 map((categories: ICategory[]) => categories === null).
                 distinctUntilChanged().
                 subscribe((loading) => this.loading = loading),
         );
 
-        this.subscriptionTracker.push(
+        this.trackSubscription(
             this.initialFilter.
                 first().
                 switchMap((filter) => Observable.combineLatest(

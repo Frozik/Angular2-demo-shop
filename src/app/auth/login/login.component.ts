@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { AppActions } from './../../app.actions';
-import { ISubscriptionTracker } from './../../core/models';
-import { SubscriptionTrackerService } from './../../core/subscription-tracker.service';
+import { SubscriptionComponent, trackSubscription } from './../../helpers/subscription-component.decorator';
 import { AuthService } from './../auth.service';
 
 @Component({
@@ -11,21 +10,18 @@ import { AuthService } from './../auth.service';
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
 })
+@SubscriptionComponent()
 export class LoginComponent implements OnInit {
     public form: FormGroup;
     public incorrectLogin: boolean = false;
 
-    private readonly subscriptionTracker: ISubscriptionTracker;
+    private readonly trackSubscription = trackSubscription.bind(this);
 
     constructor(
         private authService: AuthService,
         private formBuilder: FormBuilder,
         private appActions: AppActions,
-        subscriptionTrackerService: SubscriptionTrackerService,
-        viewContainerRef: ViewContainerRef,
-    ) {
-        this.subscriptionTracker = subscriptionTrackerService.buildTracker(viewContainerRef);
-    }
+    ) { }
 
     ngOnInit() {
         this.form = this.formBuilder.group({
@@ -33,7 +29,7 @@ export class LoginComponent implements OnInit {
             password: [''],
         });
 
-        this.subscriptionTracker.push(
+        this.trackSubscription(
             this.form.valueChanges.subscribe(() => this.incorrectLogin = false),
         );
     }
