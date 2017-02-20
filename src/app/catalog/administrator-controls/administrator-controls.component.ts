@@ -1,6 +1,6 @@
+import { NgRedux } from '@angular-redux/store';
 import { Location } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { NgRedux } from 'ng2-redux';
 
 import { IAppState } from './../../app.store';
 import { CatalogActions } from './../catalog.actions';

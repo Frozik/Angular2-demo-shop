@@ -1,6 +1,6 @@
+import { select } from '@angular-redux/store';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { select } from 'ng2-redux';
 import { Observable } from 'rxjs/Observable';
 
 import { IAppState } from './../../app.store';

@@ -1,5 +1,5 @@
+import { select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
-import { select } from 'ng2-redux';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';

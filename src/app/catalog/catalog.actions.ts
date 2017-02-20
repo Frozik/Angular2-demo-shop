@@ -1,5 +1,5 @@
+import { NgRedux } from '@angular-redux/store';
 import { Injectable } from '@angular/core';
-import { NgRedux } from 'ng2-redux';
 import 'rxjs/add/observable/zip';
 import { Subscription } from 'rxjs/Subscription';
 

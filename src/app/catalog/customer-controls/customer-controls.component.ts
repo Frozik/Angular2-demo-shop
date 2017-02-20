@@ -1,5 +1,5 @@
+import { NgRedux, select } from '@angular-redux/store';
 import { Component, Input } from '@angular/core';
-import { NgRedux, select } from 'ng2-redux';
 import { Observable } from 'rxjs/Observable';
 
 import { IAppState } from './../../app.store';

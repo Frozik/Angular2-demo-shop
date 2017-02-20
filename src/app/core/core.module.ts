@@ -1,3 +1,4 @@
+import { NgReduxModule } from '@angular-redux/store';
 import { CommonModule } from '@angular/common';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { HttpModule } from '@angular/http';
@@ -10,6 +11,7 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
         CommonModule,
         HttpModule,
         BrowserModule,
+        NgReduxModule,
     ],
 })
 export class CoreModule {

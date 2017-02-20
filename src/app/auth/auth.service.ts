@@ -1,7 +1,7 @@
+import { NgRedux, select } from '@angular-redux/store';
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Router } from '@angular/router';
-import { NgRedux, select } from 'ng2-redux';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
@@ -9,7 +9,6 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/share';
 import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
 import * as URI from 'urijs';
 
 import { environment } from './../../environments/environment';

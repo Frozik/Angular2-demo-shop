@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-redux/store": "^6.0.1",
     "@angular/common": "^2.3.1",
     "@angular/compiler": "^2.3.1",
     "@angular/core": "^2.3.1",
@@ -24,7 +25,6 @@
     "chart.js": "^2.4.0",
     "core-js": "^2.4.1",
     "ng2-charts": "^1.5.0",
-    "ng2-redux": "^5.1.0",
     "normalize.css": "^5.0.0",
     "redux": "^3.6.0",
     "redux-localstorage": "^0.4.1",
@@ -40,7 +40,6 @@
     "@types/jasmine": "^2.5.42",
     "@types/node": "^7.0.5",
     "@types/urijs": "^1.15.31",
-    "angular-cli": "1.0.0-beta.25.5",
     "codelyzer": "~2.0.0-beta.1",
     "jasmine-core": "2.5.2",
     "jasmine-spec-reporter": "^3.2.0",
