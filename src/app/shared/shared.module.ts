@@ -5,8 +5,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ControlCaptionComponent } from './components/control-caption/control-caption.component';
+import { DialogWindowComponent } from './components/dialog-window/dialog-window.component';
 import { InputComponent } from './components/input/input.component';
-import { PopupComponent } from './components/popup/popup.component';
+import { ModalPopupComponent } from './components/modal-popup/modal-popup.component';
 import { ProgressComponent } from './components/progress/progress.component';
 import { RadioboxComponent } from './components/radiobox/radiobox.component';
 import { RangeComponent } from './components/range/range.component';
@@ -31,7 +32,8 @@ import { UrlExistsValidatorDirective } from './validators/url-exists.directive';
         NumberPipe,
         ToFixedPipe,
         CheckboxComponent,
-        PopupComponent,
+        ModalPopupComponent,
+        DialogWindowComponent,
         ProgressComponent,
         SelectComponent,
         RangeComponent,
@@ -53,7 +55,8 @@ import { UrlExistsValidatorDirective } from './validators/url-exists.directive';
         NumberPipe,
         ToFixedPipe,
         CheckboxComponent,
-        PopupComponent,
+        ModalPopupComponent,
+        DialogWindowComponent,
         ProgressComponent,
         SelectComponent,
         RangeComponent,

@@ -1,7 +1,7 @@
 import { Directive, forwardRef } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, Validator } from '@angular/forms';
 
-import { noLeadingTrailingWhitespaceValidator } from './no-lt-whitespace.function';
+import { noLeadingTrailingWhitespaceValidator } from './no-lt-whitespace-validator.function';
 
 @Directive({
     selector: '[appNoLTWhitespace][ngModel],[appNoLTWhitespace][formControl],[appNoLTWhitespace][formControlName]',

@@ -5,17 +5,17 @@ export function urlExistsValidator(control: AbstractControl) {
     const url = control.value;
 
     return new Observable((observer) => {
-        const img = new Image();
+        const image = new Image();
 
-        img.onload = () => {
+        image.onload = () => {
             observer.next(null);
             observer.complete();
         };
-        img.onerror = () => {
+        image.onerror = () => {
             observer.next({ urlExists: { valid: false } });
             observer.complete();
         };
 
-        img.src = url;
+        image.src = url;
     });
 }

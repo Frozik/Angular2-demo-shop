@@ -1,12 +1,16 @@
-<app-popup
+<app-dialog-window
     [caption]="caption"
     [formGroup]="form"
+    [okButtonDisabled]="!isFormValid"
     (cancelPressed)="cancelPressed.emit()"
     (okPressed)="buildProductFromFormValues(form.value)"
 >
     <div class="edit-form">
         <div>
-            <fieldset class="fields">
+            <fieldset
+                [formGroup]="form"
+                class="fields"
+            >
                 <div class="input image">
                     <label for="image">Image:</label>
                     <input
@@ -105,11 +109,12 @@
             </fieldset>
             <div class="image-preview">
                 <h3>Image preview</h3>
+
                 <img
-                    *ngIf="form.controls.imageUrl.valid"
-                    [src]="imageUrlInput.value"
+                    *ngIf="!form.controls.imageUrl.pending && form.controls.imageUrl.valid"
+                    [src]="form.controls.imageUrl.value"
                 >
             </div>
         </div>
     </div>
-</app-popup>
+</app-dialog-window>

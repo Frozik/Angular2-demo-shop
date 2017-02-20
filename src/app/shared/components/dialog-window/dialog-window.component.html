@@ -1,0 +1,31 @@
+<app-modal-popup class="dialog--theme-default dialog--size-default">
+    <header class="header">
+        <span
+            class="header__close"
+            (click)="cancelPressed.emit($event)"
+        >&times;</span>
+        <h3
+            class="header__title"
+        >{{
+            caption
+        }}</h3>
+    </header>
+
+    <div class="body">
+        <ng-content></ng-content>
+    </div>
+
+    <footer class="footer">
+        <div class="footer__block">
+            <app-button
+                (pressed)="okPressed.emit($event)"
+                [disabled]="okButtonDisabled"
+                caption="Ok"
+            ></app-button>
+            <app-button
+                (pressed)="cancelPressed.emit($event)"
+                caption="Cancel"
+            ></app-button>
+        </div>
+    </footer>
+</app-modal-popup>

@@ -1,0 +1,73 @@
+@import "./../../styles/colors.scss";
+@import "./../../styles/box-model.scss";
+
+.modal {
+    box-sizing: border-box;
+    display: block;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    overflow: auto;
+}
+
+    .modal--theme-default {
+        $modal-title-color: $primary-text-color;
+        $modal-text-color: $controls-text-color;
+        $modal-light-color: lighten($controls-light-primary-background-color, 10%);
+        $modal-dark-color: lighten($controls-default-primary-background-color, 10%);
+        $modal-paranja-color: rgba(0, 0, 0, 0.4);
+
+        &.modal {
+            background-color: $modal-paranja-color;
+        }
+
+        .modal__content {
+            background-color: $modal-light-color;
+        }
+    }
+    
+    .modal--size-default {
+        $modal-header-height: 50px;
+        $modal-font-size: 16px;
+        $modal-text-padding: $padding-size;
+        $modal-content-padding: $block-margin-size;
+
+        .modal__content {
+            width: 60%;
+            min-width: 640px;
+            max-width: 1024px;
+        }
+    }
+
+    .modal__content {
+        box-sizing: border-box;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        margin: auto;
+
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, .5);
+        overflow: hidden;
+        transform: translateY(-50%);
+
+        animation-name: modal-drop-from-top;
+        animation-duration: .5s;
+
+        @keyframes modal-drop-from-top {
+            from {
+                top: 0%;
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                top: 50%;
+                transform: translateY(-50%);
+                opacity: 1;
+            }
+        }
+    }

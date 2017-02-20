@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { select } from 'ng2-redux';
 import { Observable } from 'rxjs/Observable';
 
@@ -25,46 +25,85 @@ export class ProductPopupComponent implements OnInit {
     public caption: string;
     public genderType: typeof Gender = Gender;
     public form: FormGroup;
+    public isFormValid = false;
 
     private readonly trackSubscription = trackSubscription.bind(this);
 
-    constructor(private formBuilder: FormBuilder) { }
+    constructor(private formBuilder: FormBuilder) {
+        this.form = this.formBuilder.group({
+            imageUrl: [''],
+            name: [''],
+            category: [''],
+            gender: [''],
+            description: [''],
+            cost: [''],
+            rating: [''],
+        });
+    }
 
     public ngOnInit() {
-        this.caption = !this.editProduct
-            ? 'Add product'
-            : `Edit "${this.editProduct.name}"`;
-
         const {
-            categoryId = null,
-            image = '',
-            name = '',
-            description = '',
-            cost = 0,
-            rating = 5,
-            gender = Gender.Man,
-        } = this.editProduct || { };
+            imageUrl: imageUrlControl,
+            name: nameControl,
+            gender: genderControl,
+            description: descriptionControl,
+            cost: costControl,
+            rating: ratingControl,
+            category: categoryControl,
+        } = this.form.controls;
 
-        this.form = this.formBuilder.group({
-            imageUrl: [image.trim()],
-            name: [name.trim()],
-            category: [''],
-            gender: [gender.toString()],
-            description: [description.trim()],
-            cost: [cost.toString()],
-            rating: [rating.toString()],
-        });
+        if (this.editProduct) {
+            const {
+                image,
+                name,
+                description,
+                cost,
+                rating,
+                gender,
+            } = this.editProduct;
+
+            this.caption = `Edit "${name}"`;
+
+            imageUrlControl.setValue(image);
+            nameControl.setValue(name);
+            genderControl.setValue(gender.toString());
+            descriptionControl.setValue(description);
+            costControl.setValue(cost.toString());
+            ratingControl.setValue(rating.toString());
+
+            this.isFormValid = true;
+        } else {
+            this.caption = 'Add product';
+
+            genderControl.setValue(Gender.Man.toString());
+            costControl.setValue('0');
+            ratingControl.setValue('5');
+
+            this.isFormValid = false;
+        }
+
+        // Workaround for https://github.com/angular/angular/issues/5950#issuecomment-206925375
+        this.trackSubscription(
+            this.form.statusChanges.subscribe(() => this.isFormValid = this.form.valid),
+        );
 
         this.trackSubscription(
-            this.categories.subscribe((categories) => {
-                this.form.controls['category'].setValue(categories && categories.length
-                    ? (
-                        categories.find((category) => category.id === categoryId) || categories[0]
-                    ).id.toString()
-                    : '',
-                );
-            }),
+            this.categories.
+                subscribe((categories) => {
+                    const controlCategoryId = parseInt(this.form.controls['category'].value, 10) || 
+                        (this.editProduct ? this.editProduct.categoryId : null);
+
+                    categoryControl.setValue(categories && categories.length
+                        ? (
+                            categories.find((category) => category.id === controlCategoryId) || categories[0]
+                        ).id.toString()
+                        : '',
+                    );
+                }),
         );
+
+        // Fix unknown bug when statusChanges is triggered only with PENDING status right after initialization
+        setTimeout(() => this.form.updateValueAndValidity(), 0);
     }
 
     public buildProductFromFormValues(formValues) {

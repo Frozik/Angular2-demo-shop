@@ -17,7 +17,7 @@
     (okPressed)="updateProductDetails($event); editing = false;"
 ></app-product-popup>
 
-<app-popup
+<app-dialog-window
     *ngIf="deleting"
     caption="Delete &quot;{{product.name}}&quot;"
     (cancelPressed)="deleting = false"
@@ -26,4 +26,4 @@
     <p class="confirm">
         Are you sure want to delete "{{product.name}}"?
     </p>
-</app-popup>
+</app-dialog-window>

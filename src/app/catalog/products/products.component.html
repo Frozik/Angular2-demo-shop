@@ -41,7 +41,7 @@
     </aside>
 </article>
 
-<app-popup
+<app-dialog-window
     *ngIf="popup === popupType.AddCategory"
     class="popup"
     caption="Add category"
@@ -54,9 +54,9 @@
             <input #categoryName type="text" id="category-name">
         </div>
     </fieldset>
-</app-popup>
+</app-dialog-window>
 
-<app-popup
+<app-dialog-window
     *ngIf="popup === popupType.DeleteCategory"
     class="popup"
     caption="Delete category"
@@ -76,7 +76,7 @@
             </select>
         </div>
     </fieldset>
-</app-popup>
+</app-dialog-window>
 
 <app-product-popup
     *ngIf="popup === popupType.AddProduct"

@@ -3,20 +3,20 @@ import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { PopupComponent } from './popup.component';
+import { DialogWindowComponent } from './dialog-window.component';
 
 describe('ProductComponent', () => {
-    let component: PopupComponent;
-    let fixture: ComponentFixture<PopupComponent>;
+    let component: DialogWindowComponent;
+    let fixture: ComponentFixture<DialogWindowComponent>;
 
     beforeEach(async(() => {
         TestBed.
-            configureTestingModule({ declarations: [PopupComponent] }).
+            configureTestingModule({ declarations: [DialogWindowComponent] }).
             compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(PopupComponent);
+        fixture = TestBed.createComponent(DialogWindowComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
