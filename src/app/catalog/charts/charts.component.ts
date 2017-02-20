@@ -80,7 +80,7 @@ export class ChartsComponent implements OnInit, OnDestroy {
                 }),
         );
 
-        this.subscriptionTracker.push(
+        this.trackSubscription(
             Observable.
                 combineLatest(
                     this.categories.filter((categories) => !!categories),
