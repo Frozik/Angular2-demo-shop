@@ -8,14 +8,13 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 
-import { IAppState } from './../../app.store';
 import { AuthService } from './../../auth/auth.service';
 import { Role } from './../../auth/models';
 import { SubscriptionComponent, trackSubscription } from './../../helpers/subscription-component.decorator';
+import { ProductDetailsParams } from './../catalog-routing.module';
 import { CatalogActions } from './../catalog.actions';
 import { Gender, ICategory, IProduct } from './../models';
-
-import { ProductDetailsParams } from './../catalog-routing.module';
+import { selectCategories, selectFilterProduct } from './../state-selectors';
 
 @Component({
     selector: 'app-product-details',
@@ -24,10 +23,8 @@ import { ProductDetailsParams } from './../catalog-routing.module';
 })
 @SubscriptionComponent()
 export class ProductDetailsComponent implements OnInit, OnDestroy {
-    @select((state: IAppState) => state.catalog.persistent.categories)
-    public categories: Observable<ICategory[]>;
-    @select((state: IAppState) => state.catalog.filter.product)
-    public product: Observable<IProduct>;
+    @select(selectCategories) public categories: Observable<ICategory[]>;
+    @select(selectFilterProduct) public product: Observable<IProduct>;
 
     public category: ICategory = null;
     public loading: boolean = true;

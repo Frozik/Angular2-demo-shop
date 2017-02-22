@@ -5,10 +5,14 @@ import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/filter';
 import { Observable } from 'rxjs/Observable';
 
-import { IAppState } from './../../app.store';
 import { SubscriptionComponent, trackSubscription } from './../../helpers/subscription-component.decorator';
 import { CatalogActions } from './../catalog.actions';
-import { ICategory } from './../models';
+import { ICategory, IRevenueByCategory, ISoldItemsByCategory } from './../models';
+import {
+    selectCategories,
+    selectChartSoldByCategory,
+    selectChartSoldPriceByCategory,
+} from './../state-selectors';
 
 @Component({
     selector: 'app-charts',
@@ -17,12 +21,9 @@ import { ICategory } from './../models';
 })
 @SubscriptionComponent()
 export class ChartsComponent implements OnInit, OnDestroy {
-    @select((state: IAppState) => state.catalog.persistent.categories)
-    public categories: Observable<ICategory[]>;
-    @select((state: IAppState) => state.catalog.chart.soldByCategory)
-    public soldItemsByCategory: Observable<Array<{ count: number, categoryId: number }>>;
-    @select((state: IAppState) => state.catalog.chart.soldPriceByCategory)
-    public revenueByCategory: Observable<Array<{ sold: number, categoryId: number }>>;
+    @select(selectCategories) public categories: Observable<ICategory[]>;
+    @select(selectChartSoldByCategory) public soldItemsByCategory: Observable<ISoldItemsByCategory[]>;
+    @select(selectChartSoldPriceByCategory) public revenueByCategory: Observable<IRevenueByCategory[]>;
 
     public soldItemsByCategoryData: {
         dataset: {

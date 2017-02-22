@@ -15,6 +15,12 @@ import { getElementOffset } from './../../helpers';
 import { SubscriptionComponent, trackSubscription } from './../../helpers/subscription-component.decorator';
 import { CatalogActions } from './../catalog.actions';
 import { ICategory, IProduct } from './../models';
+import {
+    selectCategories,
+    selectFilterEndOfStream,
+    selectFilterLoading,
+    selectFilterProducts,
+} from './../state-selectors';
 
 @Component({
     selector: 'app-product-list',
@@ -25,14 +31,10 @@ import { ICategory, IProduct } from './../models';
 export class ProductListComponent implements OnInit {
     @ViewChild('endOfListMarker') private endOfListMarker: ElementRef;
 
-    @select((state: IAppState) => state.catalog.persistent.categories)
-    public categories: Observable<ICategory[]>;
-    @select((state: IAppState) => state.catalog.filter.products)
-    public products: Observable<IProduct[]>;
-    @select((state: IAppState) => state.catalog.filter.loading)
-    public fetching: Observable<boolean>;
-    @select((state: IAppState) => state.catalog.filter.endOfProductsStream)
-    public endOfProductsStream: Observable<boolean>;
+    @select(selectCategories) public categories: Observable<ICategory[]>;
+    @select(selectFilterProducts) public products: Observable<IProduct[]>;
+    @select(selectFilterLoading) public fetching: Observable<boolean>;
+    @select(selectFilterEndOfStream) public endOfProductsStream: Observable<boolean>;
 
     public windowScrolledSubject: Subject<Event> = new Subject<Event>();
 

@@ -11,7 +11,6 @@ import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
-import { IAppState } from './../../app.store';
 import { isDeepEqual } from './../../helpers';
 import { SubscriptionComponent, trackSubscription } from './../../helpers/subscription-component.decorator';
 import { IRange } from './../../shared/models';
@@ -19,6 +18,7 @@ import { NumberPipe } from './../../shared/pipes/number.pipe';
 import { CatalogActions } from './../catalog.actions';
 import { Gender, ICategory, IProductFilter } from './../models';
 import { GenderPipe } from './../pipes/gender.pipe';
+import { selectCategories, selectFilter } from './../state-selectors';
 
 @Component({
     selector: 'app-product-filter',
@@ -27,10 +27,8 @@ import { GenderPipe } from './../pipes/gender.pipe';
 })
 @SubscriptionComponent()
 export class ProductFilterComponent implements OnInit {
-    @select((state: IAppState) => state.catalog.persistent.categories)
-    public categories: Observable<ICategory[]>;
-    @select((state: IAppState) => state.catalog.filter.filter)
-    public initialFilter: Observable<IProductFilter>;
+    @select(selectCategories) public categories: Observable<ICategory[]>;
+    @select(selectFilter) public initialFilter: Observable<IProductFilter>;
 
     public availabilitySubject: Subject<boolean> = new Subject<boolean>();
     public genderSubject: Subject<Gender> = new Subject<Gender>();

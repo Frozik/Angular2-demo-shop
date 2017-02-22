@@ -1,11 +1,11 @@
 import { select } from '@angular-redux/store';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 
-import { IAppState } from './../../app.store';
 import { SubscriptionComponent, trackSubscription } from './../../helpers/subscription-component.decorator';
 import { Gender, ICategory, IProduct } from './../models';
+import { selectCategories } from './../state-selectors';
 
 @Component({
     selector: 'app-product-popup',
@@ -14,8 +14,7 @@ import { Gender, ICategory, IProduct } from './../models';
 })
 @SubscriptionComponent()
 export class ProductPopupComponent implements OnInit {
-    @select((state: IAppState) => state.catalog.persistent.categories)
-    public categories: Observable<ICategory[]>;
+    @select(selectCategories) public categories: Observable<ICategory[]>;
 
     @Input() public editProduct: IProduct = null;
 

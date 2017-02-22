@@ -2,12 +2,12 @@ import { select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { IAppState } from './../../app.store';
 import { AuthService } from './../../auth/auth.service';
 import { Role } from './../../auth/models';
 import { SubscriptionComponent, trackSubscription } from './../../helpers/subscription-component.decorator';
 import { CatalogActions } from './../catalog.actions';
 import { ICategory, IProduct } from './../models';
+import { selectCategories } from './../state-selectors';
 
 enum Popup {
     None,
@@ -23,8 +23,7 @@ enum Popup {
 })
 @SubscriptionComponent()
 export class ProductsComponent implements OnInit {
-    @select((state: IAppState) => state.catalog.persistent.categories)
-    public categories: Observable<ICategory[]>;
+    @select(selectCategories) public categories: Observable<ICategory[]>;
 
     public sidebarShown: boolean = false;
     public popup: Popup = Popup.None;

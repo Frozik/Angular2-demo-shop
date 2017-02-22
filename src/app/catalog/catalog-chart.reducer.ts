@@ -1,10 +1,11 @@
 import { AppActions } from './../app.actions';
 import { CatalogActions } from './../catalog/catalog.actions';
 import { IPayloadAction } from './../redux-action.type';
+import { IRevenueByCategory, ISoldItemsByCategory } from './models';
 
 export interface IChartStore {
-    soldByCategory: Array<{ count: number, categoryId: number }>;
-    soldPriceByCategory: Array<{ sold: number, categoryId: number }>;
+    soldByCategory: ISoldItemsByCategory[];
+    soldPriceByCategory: IRevenueByCategory[];
 }
 
 const initialState: IChartStore = {
