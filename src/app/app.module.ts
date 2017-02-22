@@ -1,5 +1,5 @@
 import { DevToolsExtension, NgRedux } from '@angular-redux/store';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import * as Redux from 'redux';
 
 // TypeScript fails to resolve 'redux-logger' module
@@ -12,6 +12,7 @@ import { enhancers, IAppState, rootReducer } from './app.store';
 import { AppComponent } from './app/app.component';
 import { AuthModule } from './auth/auth.module';
 import { CatalogModule } from './catalog/catalog.module';
+import { configurationFactory, ConfigurationService } from './configuration.service';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 
@@ -25,7 +26,16 @@ import { SharedModule } from './shared/shared.module';
     ],
     declarations: [AppComponent],
     bootstrap: [AppComponent],
-    providers: [AppActions],
+    providers: [
+        ConfigurationService,
+        AppActions,
+        {
+            provide: APP_INITIALIZER,
+            useFactory: configurationFactory,
+            deps: [ConfigurationService],
+            multi: true
+        },
+    ],
 })
 export class AppModule {
     constructor(
