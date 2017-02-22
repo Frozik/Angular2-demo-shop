@@ -7,7 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class ButtonComponent {
     @Input() public caption: string;
-    @Input() public disabled: boolean = false;
+    @Input() public disabled = false;
 
     @Output() public pressed = new EventEmitter();
 }

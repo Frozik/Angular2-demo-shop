@@ -6,8 +6,8 @@ import { IAccount, ICredentials } from './models';
 
 @Injectable()
 export class AuthActions {
-    public static StoreCredentials: string = 'auth-store-credentials';
-    public static StoreAccounts: string = 'auth-store-accounts';
+    public static StoreCredentials = 'auth-store-credentials';
+    public static StoreAccounts = 'auth-store-accounts';
 
     constructor(private ngRedux: NgRedux<IAppState>) { }
 

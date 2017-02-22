@@ -117,7 +117,7 @@ export class ProductPopupComponent implements OnInit {
         };
 
         this.okPressed.emit(Object.assign(
-            { },
+            {},
             this.editProduct || { id: null, count: 0, soldCount: 0 },
             editableFields,
         ));

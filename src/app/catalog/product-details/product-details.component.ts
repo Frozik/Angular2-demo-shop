@@ -27,7 +27,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     @select(selectFilterProduct) public product: Observable<IProduct>;
 
     public category: ICategory = null;
-    public loading: boolean = true;
+    public loading = true;
     public genderType: typeof Gender = Gender;
     public roles: typeof Role = Role;
 

@@ -13,7 +13,7 @@ import { AuthService } from './../auth.service';
 @SubscriptionComponent()
 export class LoginComponent implements OnInit {
     public form: FormGroup;
-    public incorrectLogin: boolean = false;
+    public incorrectLogin = false;
 
     private readonly trackSubscription = trackSubscription.bind(this);
 

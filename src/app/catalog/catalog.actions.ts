@@ -25,18 +25,18 @@ import { IProduct, IProductFilter, SellState } from './models';
 
 @Injectable()
 export class CatalogActions {
-    public static StoreCategories: string = 'catalog-store-categories';
-    public static ClearProducts: string = 'catalog-clear-products';
-    public static LoadingNextProductsPage: string = 'catalog-loading-products';
-    public static AppendPageProducts: string = 'catalog-append-products';
-    public static FinalizeProductsStream: string = 'catalog-finalize-products';
-    public static StoreProduct: string = 'catalog-store-product';
-    public static StoreFilter: string = 'catalog-store-filter';
-    public static ClearChartDataSets: string = 'catalog-clear-data-sets';
-    public static StoreChartCountByCategory: string = 'catalog-store-chart-count';
-    public static StoreChartSoldByCategory: string = 'catalog-store-chart-sold';
+    public static StoreCategories = 'catalog-store-categories';
+    public static ClearProducts = 'catalog-clear-products';
+    public static LoadingNextProductsPage = 'catalog-loading-products';
+    public static AppendPageProducts = 'catalog-append-products';
+    public static FinalizeProductsStream = 'catalog-finalize-products';
+    public static StoreProduct = 'catalog-store-product';
+    public static StoreFilter = 'catalog-store-filter';
+    public static ClearChartDataSets = 'catalog-clear-data-sets';
+    public static StoreChartCountByCategory = 'catalog-store-chart-count';
+    public static StoreChartSoldByCategory = 'catalog-store-chart-sold';
 
-    public static SetSellState: string = 'catalog-set-sell-state';
+    public static SetSellState = 'catalog-set-sell-state';
 
     private categorySubscription: Subscription = Subscription.EMPTY;
     private productsSubscription: Subscription = Subscription.EMPTY;

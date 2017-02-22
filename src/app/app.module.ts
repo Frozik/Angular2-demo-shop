@@ -33,7 +33,7 @@ import { SharedModule } from './shared/shared.module';
             provide: APP_INITIALIZER,
             useFactory: configurationFactory,
             deps: [ConfigurationService],
-            multi: true
+            multi: true,
         },
     ],
 })
@@ -42,7 +42,7 @@ export class AppModule {
         private ngRedux: NgRedux<IAppState>,
         private devTool: DevToolsExtension,
     ) {
-        const initialState: IAppState = { };
+        const initialState: IAppState = {};
         const middleware: Redux.Middleware[] = [createLogger()];
         const storeEnhancers: Array<Redux.StoreEnhancer<IAppState>> = devTool.isEnabled()
             ? [...enhancers, devTool.enhancer()]

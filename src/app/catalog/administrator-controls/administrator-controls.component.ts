@@ -14,8 +14,8 @@ import { IProduct } from './../models';
 export class AdministratorControlsComponent {
     @Input() public product: IProduct;
 
-    public editing: boolean = false;
-    public deleting: boolean = false;
+    public editing = false;
+    public deleting = false;
 
     public constructor(
         private ngRedux: NgRedux<IAppState>,

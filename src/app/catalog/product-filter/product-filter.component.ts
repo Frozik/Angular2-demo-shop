@@ -38,7 +38,7 @@ export class ProductFilterComponent implements OnInit {
     public textSubject: Subject<string> = new Subject<string>();
 
     public genderItems: Array<{ display: string, value: Gender }>;
-    public loading: boolean = true;
+    public loading = true;
 
     private readonly trackSubscription = trackSubscription.bind(this);
 

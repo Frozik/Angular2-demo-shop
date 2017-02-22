@@ -19,7 +19,7 @@ export class NumberRangeValidatorDirective implements OnInit, Validator {
     private validator: ValidatorFn;
 
     public ngOnInit() {
-        const { minValue = -Infinity, maxValue = Infinity } = this.appNumberRange || { };
+        const { minValue = -Infinity, maxValue = Infinity } = this.appNumberRange || {};
 
         this.validator = numberRangeValidator(minValue, maxValue);
     }

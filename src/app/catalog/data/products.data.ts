@@ -433,7 +433,7 @@ export function sellProduct(productId: number): Observable<boolean> {
         return Observable.of(false).delay(1000);
     }
 
-    setStorageProduct(Object.assign({ }, product, { soldCount: product.soldCount + 1 }));
+    setStorageProduct(Object.assign({}, product, { soldCount: product.soldCount + 1 }));
 
     return Observable.of(true).delay(2000);
 }
@@ -441,11 +441,11 @@ export function sellProduct(productId: number): Observable<boolean> {
 export function addProductsToWarehouse(productId: number, count: number) {
     const product = getStorageProducts().find((innerProduct) => innerProduct.id === productId);
 
-    setStorageProduct(Object.assign({ }, product, { count: product.count + count }));
+    setStorageProduct(Object.assign({}, product, { count: product.count + count }));
 }
 
 export function updateProductDetails(product: IProduct) {
-    setStorageProduct(Object.assign({ }, product));
+    setStorageProduct(Object.assign({}, product));
 }
 
 export function deleteProduct(productId: number) {
@@ -509,7 +509,7 @@ export function addProduct(product: IProduct): Observable<boolean> {
 
     if (result) {
         setStorageProduct(Object.assign(
-            { },
+            {},
             product,
             { id: Math.max(...products.map((innerProduct) => innerProduct.id)) + 1 },
         ));

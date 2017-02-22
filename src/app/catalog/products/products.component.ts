@@ -25,10 +25,10 @@ enum Popup {
 export class ProductsComponent implements OnInit {
     @select(selectCategories) public categories: Observable<ICategory[]>;
 
-    public sidebarShown: boolean = false;
+    public sidebarShown = false;
     public popup: Popup = Popup.None;
     public popupType: typeof Popup = Popup;
-    public showAdminControls: boolean = false;
+    public showAdminControls = false;
 
     private readonly trackSubscription = trackSubscription.bind(this);
 

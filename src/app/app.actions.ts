@@ -5,7 +5,7 @@ import { IAppState } from './app.store';
 
 @Injectable()
 export class AppActions {
-    public static ResetCache: string = 'reset-cache';
+    public static ResetCache = 'reset-cache';
 
     constructor(private ngRedux: NgRedux<IAppState>) { }
 

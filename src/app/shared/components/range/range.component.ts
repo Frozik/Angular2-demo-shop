@@ -30,9 +30,9 @@ enum TrackSlider {
 @SubscriptionComponent()
 export class RangeComponent implements OnInit {
     @Input() public caption: string;
-    @Input() public min: number = 0;
-    @Input() public max: number = 100;
-    @Input() public step: number = 1;
+    @Input() public min = 0;
+    @Input() public max = 100;
+    @Input() public step = 1;
     @Input() public left: number = null;
     @Input() public right: number = null;
 
