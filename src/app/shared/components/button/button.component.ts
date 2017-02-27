@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+    Component,
+    ElementRef,
+    EventEmitter,
+    HostListener,
+    Input,
+    Output,
+} from '@angular/core';
 
 @Component({
     selector: 'app-button',
@@ -10,4 +17,32 @@ export class ButtonComponent {
     @Input() public disabled = false;
 
     @Output() public pressed = new EventEmitter();
+
+    public mousePressed = false;
+    public mouseHover = false;
+
+    buttonClicked(event: MouseEvent) {
+        if (!this.disabled) {
+            this.pressed.emit(event);
+        }
+    }
+
+    mouseDown(event: MouseEvent) {
+        if (!this.disabled) {
+            this.mousePressed = true;
+        }
+    }
+
+    mouseEnter(event: MouseEvent) {
+        this.mouseHover = true;
+    }
+
+    mouseLeave(event: MouseEvent) {
+        this.mouseHover = false;
+    }
+
+    @HostListener('window:mouseup', ['$event'])
+    public mouseUp(event: MouseEvent) {
+        this.mousePressed = false;
+    }
 }

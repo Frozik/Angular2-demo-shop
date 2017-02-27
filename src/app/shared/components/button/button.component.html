@@ -1,7 +1,12 @@
-<button
+<div
     class="button button--theme-default button--size-default"
-    (click)="pressed.emit($event)"
-    [disabled]="disabled"
+    [class.button--disabled]="disabled"
+    [class.button--pressed]="mousePressed"
+    [class.button--hover]="mouseHover"
+    (mouseenter) ="mouseEnter($event)"
+    (mouseleave) ="mouseLeave($event)"
+    (mousedown)="mouseDown($event)"
+    (click)="buttonClicked($event)"
 >
-    {{caption}}
-</button>
+    <span class="button__text">{{caption}}</span>
+</div>
