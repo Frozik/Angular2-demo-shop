@@ -1,10 +1,7 @@
 import { DevToolsExtension, NgRedux } from '@angular-redux/store';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import * as Redux from 'redux';
-
-// TypeScript fails to resolve 'redux-logger' module
-// tslint:disable-next-line:no-var-requires
-const createLogger = require('redux-logger');
+import * as createLogger from 'redux-logger';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppActions } from './app.actions';

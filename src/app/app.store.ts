@@ -1,8 +1,5 @@
 import { combineReducers } from 'redux';
-
-// TypeScript fails to resolve 'redux-localstorage' module
-// tslint:disable-next-line:no-var-requires
-const persistState = require('redux-localstorage');
+import * as persistState from 'redux-localstorage';
 
 import { authReducer, IAuthStore } from './auth/auth.reducer';
 import { catalogReducer, ICatalogStore } from './catalog/catalog.store';
